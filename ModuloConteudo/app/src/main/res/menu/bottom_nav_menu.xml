@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_classes"
+        android:icon="@drawable/ic_classes_black_24dp"
+        android:title="@string/title_classes" />
+
+    <item
+        android:id="@+id/navigation_archives"
+        android:icon="@drawable/ic_archives_black_24dp"
+        android:title="@string/title_archives" />
+
+    <item
+        android:id="@+id/navigation_tutorial"
+        android:icon="@drawable/ic_tutorial_black_24dp"
+        android:title="@string/title_tutorial" />
+
+    <item
+        android:id="@+id/navigation_configuration"
+        android:icon="@drawable/ic_configuration_black_24dp"
+        android:title="@string/title_configuration" />
+
+</menu>

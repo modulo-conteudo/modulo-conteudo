@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Módulo Conteúdo</string>
+    <string name="login_entrar">Entrar</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_classes">Aulas</string>
+    <string name="title_archives">Arquivos</string>
+    <string name="title_tutorial">Tutorial</string>
+    <string name="title_configuration">Configuração</string>
+    <string name="login_inserirRa">Insira seu R.A.</string>
+    <string name="logo_description">Logomarca do aplicativo. Contém três livros empilhados e uma nuvem ao fundo da imagem.</string>
+    <string-array name="days_week">
+        <item>Segunda-feira</item>
+        <item>Terça-feira</item>
+        <item>Quarta-feira</item>
+        <item>Quinta-feira</item>
+        <item>Sexta-feira</item>
+        <item>Sábado</item>
+    </string-array>
+</resources>
