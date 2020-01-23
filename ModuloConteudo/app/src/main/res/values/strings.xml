@@ -8,6 +8,8 @@
     <string name="title_configuration">Configuração</string>
     <string name="login_inserirRa">Insira seu R.A.</string>
     <string name="logo_description">Logomarca do aplicativo. Contém três livros empilhados e uma nuvem ao fundo da imagem.</string>
+    <string name="error_ra_not_found">O RA digitado não foi encontrado e/ou não é valido.</string>
+    <string name="btn_ok">Ok!</string>
     <string-array name="days_week">
         <item>Segunda-feira</item>
         <item>Terça-feira</item>

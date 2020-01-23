@@ -7,7 +7,7 @@ import com.ufabc.moduloconteudo.data.relations.AulasDiscente
 
 class ClassesViewModel internal constructor(aulaRepository: AulaRepository): ViewModel() {
 
-    val classes : LiveData<List<AulasDiscente>> = aulaRepository.getTurmasUsingRA()
+    val classes : LiveData<List<AulasDiscente>> = aulaRepository.getAulasUsingRA()
 
 
     //private val _text = MutableLiveData<String>().apply {

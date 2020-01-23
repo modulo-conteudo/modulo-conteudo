@@ -13,7 +13,11 @@ class ClassesListAdapter : RecyclerView.Adapter<ClassesListAdapter.ClassesListVi
     private var currentDay : Int = 0
 
     class ClassesListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val class_code = itemView.class_code
+        val className = itemView.adapter_className
+        val hourBegin = itemView.adapter_hourBegin
+        val hourEnd = itemView.adapter_hourEnd
+        val classRoom = itemView.adapter_classroom
+        val campus = itemView.adapter_campus
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassesListViewHolder {
@@ -26,9 +30,20 @@ class ClassesListAdapter : RecyclerView.Adapter<ClassesListAdapter.ClassesListVi
 
     override fun onBindViewHolder(holder: ClassesListViewHolder, position: Int) {
         val currClass = classes[position].aulasDiscente[0]
-        holder.class_code.text = currClass.codigo_turma
-        if(currClass.id_dia_semana != currentDay) holder.itemView.visibility = View.GONE
-        else holder.itemView.visibility = View.VISIBLE
+        holder.className.text = currClass.codigo_turma
+        holder.hourBegin.text = currClass.horario_inicio.toString()
+        holder.hourEnd.text = currClass.horario_fim.toString()
+        holder.classRoom.text = currClass.sala
+        setVisibility(currClass.id_dia_semana, holder.itemView)
+
+    }
+
+    private fun setVisibility(idDiaSemana: Int, itemView: View) {
+        if(idDiaSemana == currentDay) {
+            itemView.visibility = View.VISIBLE
+        } else {
+            itemView.visibility = View.GONE
+        }
     }
 
     fun changeDay(currentDay : Int) {

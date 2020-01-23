@@ -30,6 +30,7 @@ class ClassesFragment : Fragment() {
     // Variables
     val classesListAdapter : ClassesListAdapter = ClassesListAdapter()
     var currentDay : Int = 0
+    var studentRa : String = ""
 
     // ViewModel
     private val classesViewModel : ClassesViewModel by viewModels {

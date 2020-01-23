@@ -1,10 +1,8 @@
 package com.ufabc.moduloconteudo.data.aula
 
-import androidx.lifecycle.LiveData
-
 class AulaRepository private constructor(private val aulaDao: AulaDao){
 
-    fun getTurmasUsingRA() = aulaDao.getAulasUsingIdDia()
+    fun getAulasUsingRA() = aulaDao.getAulasUsingRA()
 
     companion object {
         @Volatile private var instance: AulaRepository? = null
