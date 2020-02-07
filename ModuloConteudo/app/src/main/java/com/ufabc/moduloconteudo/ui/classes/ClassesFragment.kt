@@ -1,5 +1,6 @@
 package com.ufabc.moduloconteudo.ui.classes
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ufabc.moduloconteudo.utilities.InjectorUtils
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.adapters.ClassesListAdapter
+import com.ufabc.moduloconteudo.utilities.RA_EXTRA
 import kotlinx.android.synthetic.main.fragment_classes.*
 import kotlin.math.max
 import kotlin.math.min
@@ -41,6 +43,10 @@ class ClassesFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_classes, container, false)
 
         val days : Array<String> = resources.getStringArray(R.array.days_week)
+
+        // Pegar intent de RA e mandar para viewModel atualizar database
+        studentRa = activity?.intent?.getStringExtra(RA_EXTRA) ?: ""
+        classesViewModel.searchByRa(studentRa)
 
         bindComponents(root)
         setClickEvents(days)
@@ -71,7 +77,6 @@ class ClassesFragment : Fragment() {
     }
 
     private fun updateClassesList() {
-        //TODO: dar um jeito de atualizar a lista conforme o dia
         Log.d("testPrint", "currDay = " + currentDay)
         classesListAdapter.changeDay(currentDay)
     }
@@ -98,9 +103,11 @@ class ClassesFragment : Fragment() {
 
 }
 
+/***********************
 // Inserir estudante
-//btnInsert.setOnClickListener {
-//    runBlocking {
-//        classesViewModel.insertDiscente(App.context, Discente(edtRa.text.toString(), "wesley", "pereira"))
-//    }
-//}
+btnInsert.setOnClickListener {
+    runBlocking {
+        classesViewModel.insertDiscente(App.context, Discente(edtRa.text.toString(), "wesley", "pereira"))
+    }
+}
+ ********************/

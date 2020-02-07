@@ -29,20 +29,25 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setClickEvents() {
         btnLogin.setOnClickListener {
-            if(verify(edtRa.text.toString().trim())) {
+
+            if(verify(edtRa.text.toString())) {
+
                 val intent = Intent(this, HomeActivity::class.java)
-                intent.putExtra(RA_EXTRA, edtRa.text.toString().trim())
+                intent.putExtra(RA_EXTRA, edtRa.text.toString())
                 startActivity(intent, null)
+
             } else {
+
                 Snackbar.make(it, getString(R.string.error_ra_not_found), Snackbar.LENGTH_LONG)
                     .setAction( R.string.btn_ok, null)
                     .show()
+
             }
         }
     }
 
     private fun verify(txt_ra: String): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO("Criar verificação de RA (ver se existe na lista de RAs)")
         return true
     }
 
