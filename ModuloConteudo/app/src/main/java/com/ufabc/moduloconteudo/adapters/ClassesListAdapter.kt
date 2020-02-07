@@ -30,7 +30,7 @@ class ClassesListAdapter : RecyclerView.Adapter<ClassesListAdapter.ClassesListVi
 
     override fun onBindViewHolder(holder: ClassesListViewHolder, position: Int) {
         val currClass = classes[position].aulasDiscente[0]
-        holder.className.text = currClass.codigo_turma
+        holder.className.text = currClass.nome_turma
         holder.hourBegin.text = currClass.horario_inicio.toString()
         holder.hourEnd.text = currClass.horario_fim.toString()
         holder.classRoom.text = currClass.sala

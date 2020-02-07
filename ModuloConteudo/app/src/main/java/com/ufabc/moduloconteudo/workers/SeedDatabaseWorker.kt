@@ -18,7 +18,7 @@ class SeedDatabaseWorker (
 ) : CoroutineWorker(context, workerParameters){
     override suspend fun doWork(): Result = coroutineScope{
         try {
-            // TODO: SEED DATABASE
+            // TODO: SEED DATABASE AUTOMATICALLY
             // https://github.com/android/sunflower/blob/master/app/src/main/java/com/google/samples/apps/sunflower/workers/SeedDatabaseWorker.kt
 
             val database = AppDatabase.getInstance(applicationContext)
@@ -29,6 +29,7 @@ class SeedDatabaseWorker (
                     "pereira"
                 )
             )
+
             database.discenteDao().insertDiscente(
                 Discente(
                     "123124",
@@ -43,6 +44,7 @@ class SeedDatabaseWorker (
                     8,
                     10,
                     0,
+                    "Funções de uma Variável",
                     0,
                     "Denise",
                     "Goya",
@@ -51,12 +53,14 @@ class SeedDatabaseWorker (
                     "302-1"
                 )
             )
+
             database.aulaDao().insertAula(
                 Aula(
                     "A123GA",
                     10,
                     12,
                     0,
+                    "Geometria Analítica",
                     0,
                     "Denise",
                     "Goya",
@@ -72,6 +76,7 @@ class SeedDatabaseWorker (
                     "A123GA"
                 )
             )
+
             database.discenteTurmaDao().insertDiscenteTurma(
                 DiscenteTurma(
                     "123124",
@@ -80,7 +85,8 @@ class SeedDatabaseWorker (
             )
 
             Result.success()
-        } catch (ex: Exception){
+
+        } catch (ex: Exception) {
             Log.e(SeedDatabaseWorker::class.java.simpleName, "Error seeding database", ex)
             Result.failure()
         }
