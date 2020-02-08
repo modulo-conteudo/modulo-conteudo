@@ -22,6 +22,7 @@ class SeedDatabaseWorker (
             // https://github.com/android/sunflower/blob/master/app/src/main/java/com/google/samples/apps/sunflower/workers/SeedDatabaseWorker.kt
 
             val database = AppDatabase.getInstance(applicationContext)
+
             database.discenteDao().insertDiscente(
                 Discente(
                     "123123",
@@ -67,20 +68,6 @@ class SeedDatabaseWorker (
                     true,
                     true,
                     "302-1"
-                )
-            )
-
-            database.discenteTurmaDao().insertDiscenteTurma(
-                DiscenteTurma(
-                    "123124",
-                    "A123GA"
-                )
-            )
-
-            database.discenteTurmaDao().insertDiscenteTurma(
-                DiscenteTurma(
-                    "123124",
-                    "A123FUV"
                 )
             )
 
