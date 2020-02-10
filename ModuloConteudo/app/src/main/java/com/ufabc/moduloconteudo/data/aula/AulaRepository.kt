@@ -2,7 +2,7 @@ package com.ufabc.moduloconteudo.data.aula
 
 class AulaRepository private constructor(private val aulaDao: AulaDao){
 
-    fun getAulasUsingRA() = aulaDao.getAulasUsingRA()
+    fun getAulasUsingRA(ra : String) = aulaDao.getAulasUsingRA(ra)
 
     companion object {
         @Volatile private var instance: AulaRepository? = null

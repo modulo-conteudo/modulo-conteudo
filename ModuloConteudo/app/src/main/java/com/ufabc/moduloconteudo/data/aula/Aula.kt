@@ -13,6 +13,8 @@ class Aula (
     val horario_fim : Int,
     @ColumnInfo(name = "id_dia_semana")
     val id_dia_semana : Int,
+    @ColumnInfo(name = "nome_turma")
+    val nome_turma: String,
     @ColumnInfo(name = "id_tipo_aula")
     val id_tipo_aula : Int,
     @ColumnInfo(name = "nome_doscente")
