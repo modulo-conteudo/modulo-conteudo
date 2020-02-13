@@ -5,8 +5,6 @@ class DiscenteRepository private constructor(private val discenteDao: DiscenteDa
     fun getStudents() = discenteDao.getDiscentes()
     fun getStudentsWithRa(ra : String) = discenteDao.getDiscenteWithRa(ra)
 
-    suspend fun insertStudent(discente: Discente) = discenteDao.insertDiscente(discente)
-
     companion object {
         @Volatile private var instance: DiscenteRepository? = null
         fun getInstance(discenteDao: DiscenteDao) =

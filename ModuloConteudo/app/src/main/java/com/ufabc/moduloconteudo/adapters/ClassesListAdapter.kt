@@ -1,15 +1,17 @@
 package com.ufabc.moduloconteudo.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ufabc.moduloconteudo.R
+import com.ufabc.moduloconteudo.data.aula.Aula
 import com.ufabc.moduloconteudo.data.relations.AulasDiscente
 import kotlinx.android.synthetic.main.temp_aula.view.*
 
 class ClassesListAdapter : RecyclerView.Adapter<ClassesListAdapter.ClassesListViewHolder>() {
-    private var classes: List<AulasDiscente> = listOf()
+    val classes: MutableList<Aula> = mutableListOf()
     private var currentDay : Int = 0
 
     class ClassesListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -29,21 +31,11 @@ class ClassesListAdapter : RecyclerView.Adapter<ClassesListAdapter.ClassesListVi
     }
 
     override fun onBindViewHolder(holder: ClassesListViewHolder, position: Int) {
-        val currClass = classes[position].aulasDiscente[0]
+        val currClass = classes[position]
         holder.className.text = currClass.nome_turma
         holder.hourBegin.text = currClass.horario_inicio.toString()
         holder.hourEnd.text = currClass.horario_fim.toString()
         holder.classRoom.text = currClass.sala
-        setVisibility(currClass.id_dia_semana, holder.itemView)
-
-    }
-
-    private fun setVisibility(idDiaSemana: Int, itemView: View) {
-        if(idDiaSemana == currentDay) {
-            itemView.visibility = View.VISIBLE
-        } else {
-            itemView.visibility = View.GONE
-        }
     }
 
     fun changeDay(currentDay : Int) {
@@ -51,8 +43,9 @@ class ClassesListAdapter : RecyclerView.Adapter<ClassesListAdapter.ClassesListVi
         notifyDataSetChanged()
     }
 
-    fun setData(students: List<AulasDiscente>) {
-        this.classes = students
+    fun setData(students: List<Aula>) {
+        this.classes.clear()
+        this.classes.addAll(students)
         notifyDataSetChanged()
     }
 

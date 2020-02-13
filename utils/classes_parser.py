@@ -84,7 +84,7 @@ def get_json(df):
 
         for class_ in t_class:
             class_.update(
-                {'codigo_turma': str(course['Código disciplinas']),
+                {'codigo_turma': str(course['Código SIE']),
                  'nome_turma'  : course['Disciplina'],
                  }
             )
