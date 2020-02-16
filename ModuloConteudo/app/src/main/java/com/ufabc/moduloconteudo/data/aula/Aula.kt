@@ -3,9 +3,9 @@ package com.ufabc.moduloconteudo.data.aula
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 
-@Entity(tableName = "aula", primaryKeys = ["codigo_turma", "horario_inicio", "horario_fim", "id_dia_semana"])
+@Entity(tableName = "aula", primaryKeys = ["codigo_sie", "horario_inicio", "horario_fim", "id_dia_semana", "id_tipo_aula"])
 class Aula (
-    @ColumnInfo(name = "codigo_turma")
+    @ColumnInfo(name = "codigo_sie")
     val codigo_turma : String,
     @ColumnInfo(name = "horario_inicio")
     val horario_inicio : Int,
