@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -30,7 +31,9 @@ class ClassesFragment : Fragment() {
     lateinit var btnNext : Button
     lateinit var txtDay : TextView
     lateinit var recyclerClasses : RecyclerView
-    lateinit var rgQuinzenal : RadioGroup
+    lateinit var rgWeek : RadioGroup
+    lateinit var rbWeek1 : RadioButton
+    lateinit var rbWeek2: RadioButton
 
     // Variables
     val classesListAdapter : ClassesListAdapter = ClassesListAdapter()
@@ -50,8 +53,6 @@ class ClassesFragment : Fragment() {
         val days : Array<String> = resources.getStringArray(R.array.days_week)
 
         studentRa = activity?.intent?.getStringExtra(RA_EXTRA) ?: ""
-        Log.d("testPrint", studentRa)
-        classesViewModel.searchByRa(studentRa)
 
         bindComponents(root)
         setClickEvents(days)
@@ -60,14 +61,21 @@ class ClassesFragment : Fragment() {
         return root
     }
 
+    override fun onStart() {
+        super.onStart()
+        classesViewModel.searchByRa(studentRa)
+        rbWeek1.isChecked = true
+    }
+
 
     private fun bindComponents(root: View) {
         btnPrevious = root.findViewById(R.id.home_btnPrevious)
         btnNext = root.findViewById(R.id.home_btnNext)
         txtDay = root.findViewById(R.id.home_txtCurrentDay)
 
-        rgQuinzenal = root.findViewById(R.id.home_rgQuinzenal)
-
+        rgWeek = root.findViewById(R.id.home_rgWeek)
+        rbWeek1 = root.findViewById(R.id.home_rbWeek1)
+        rbWeek2 = root.findViewById(R.id.home_rbWeek2)
 
         recyclerClasses = root.findViewById(R.id.home_recyclerClasses)
         recyclerClasses.adapter = classesListAdapter
@@ -85,8 +93,9 @@ class ClassesFragment : Fragment() {
             updateTextCurrentDay(days[currentDay.value!!])
         }
 
-        rgQuinzenal.setOnCheckedChangeListener { group, checkedId ->
-            currentWeek = checkedId
+        rgWeek.setOnCheckedChangeListener { group, checkedId ->
+            if(checkedId == rbWeek1.id) currentWeek = 1
+            if(checkedId == rbWeek2.id) currentWeek = 2
             updateClassesList()
         }
     }
