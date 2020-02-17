@@ -6,7 +6,7 @@ import androidx.room.Entity
 @Entity(tableName = "aula", primaryKeys = ["codigo_sie", "horario_inicio", "horario_fim", "id_dia_semana", "id_tipo_aula"])
 class Aula (
     @ColumnInfo(name = "codigo_sie")
-    val codigo_turma : String,
+    val codigo_sie : String,
     @ColumnInfo(name = "horario_inicio")
     val horario_inicio : Int,
     @ColumnInfo(name = "horario_fim")
@@ -18,7 +18,7 @@ class Aula (
     @ColumnInfo(name = "id_tipo_aula")
     val id_tipo_aula : Int,
     @ColumnInfo(name = "nome_doscente")
-    val nome_doscente : String ,
+    val nome_doscente : String,
     @ColumnInfo(name = "sobrenome_doscente")
     val sobrenome_doscente : String,
     @ColumnInfo(name = "quinzenal_1")

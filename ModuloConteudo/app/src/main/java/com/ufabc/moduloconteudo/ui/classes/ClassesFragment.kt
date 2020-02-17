@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -29,10 +30,12 @@ class ClassesFragment : Fragment() {
     lateinit var btnNext : Button
     lateinit var txtDay : TextView
     lateinit var recyclerClasses : RecyclerView
+    lateinit var rgQuinzenal : RadioGroup
 
     // Variables
     val classesListAdapter : ClassesListAdapter = ClassesListAdapter()
     val currentDay : MutableLiveData<Int> = MutableLiveData(0)
+    var currentWeek : Int = 1
     val classes : MutableList<Aula> = mutableListOf()
     var studentRa : String = ""
 
@@ -46,7 +49,6 @@ class ClassesFragment : Fragment() {
 
         val days : Array<String> = resources.getStringArray(R.array.days_week)
 
-        // Pegar intent de RA e mandar para viewModel atualizar database
         studentRa = activity?.intent?.getStringExtra(RA_EXTRA) ?: ""
         Log.d("testPrint", studentRa)
         classesViewModel.searchByRa(studentRa)
@@ -63,6 +65,10 @@ class ClassesFragment : Fragment() {
         btnPrevious = root.findViewById(R.id.home_btnPrevious)
         btnNext = root.findViewById(R.id.home_btnNext)
         txtDay = root.findViewById(R.id.home_txtCurrentDay)
+
+        rgQuinzenal = root.findViewById(R.id.home_rgQuinzenal)
+
+
         recyclerClasses = root.findViewById(R.id.home_recyclerClasses)
         recyclerClasses.adapter = classesListAdapter
         recyclerClasses.layoutManager = LinearLayoutManager(root.context)
@@ -73,10 +79,21 @@ class ClassesFragment : Fragment() {
             currentDay.value = max(0, currentDay.value!!-1)
             updateTextCurrentDay(days[currentDay.value!!])
         }
+
         btnNext.setOnClickListener {
             currentDay.value = min(days.size-1, currentDay.value!!+1)
             updateTextCurrentDay(days[currentDay.value!!])
         }
+
+        rgQuinzenal.setOnCheckedChangeListener { group, checkedId ->
+            currentWeek = checkedId
+            updateClassesList()
+        }
+    }
+
+    private fun updateClassesList() {
+        // TODO: Gambiarra?
+        currentDay.value = currentDay.value
     }
 
     private fun updateTextCurrentDay(day : String) {
@@ -87,17 +104,14 @@ class ClassesFragment : Fragment() {
         classesViewModel.classes.observe(this, Observer {
 
             classes.clear()
-            for(x in it)
-                classes.addAll(x.aulasDiscente)
-            currentDay.value = currentDay.value
-            Log.d("testPrint", classes.size.toString())
-
+            for(x in it) classes.addAll(x.aulasDiscente)
+            updateClassesList()
         })
 
         currentDay.observe(this, Observer {
             val currDayClasses = mutableListOf<Aula>()
             for(cls in classes)
-                if (cls.id_dia_semana == currentDay.value)
+                if (cls.id_dia_semana == currentDay.value && (currentWeek == 1 && cls.quinzenal_1 || currentWeek == 2 && cls.quinzenal_2))
                     currDayClasses.add(cls)
             classesListAdapter.setData(currDayClasses)
         })

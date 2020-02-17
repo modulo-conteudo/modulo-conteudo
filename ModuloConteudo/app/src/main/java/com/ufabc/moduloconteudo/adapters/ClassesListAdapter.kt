@@ -1,29 +1,26 @@
 package com.ufabc.moduloconteudo.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.data.aula.Aula
-import com.ufabc.moduloconteudo.data.relations.AulasDiscente
-import kotlinx.android.synthetic.main.temp_aula.view.*
+import kotlinx.android.synthetic.main.card_aula.view.*
 
 class ClassesListAdapter : RecyclerView.Adapter<ClassesListAdapter.ClassesListViewHolder>() {
     val classes: MutableList<Aula> = mutableListOf()
-    private var currentDay : Int = 0
 
     class ClassesListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val className = itemView.adapter_className
-        val hourBegin = itemView.adapter_hourBegin
-        val hourEnd = itemView.adapter_hourEnd
+        val classTime = itemView.adapter_classTime
         val classRoom = itemView.adapter_classroom
-        val campus = itemView.adapter_campus
+        val teacherName = itemView.adapter_teacherName
+        val classType = itemView.adapter_classType
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassesListViewHolder {
-        return ClassesListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.temp_aula, parent, false))
+        return ClassesListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.card_aula, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -32,15 +29,13 @@ class ClassesListAdapter : RecyclerView.Adapter<ClassesListAdapter.ClassesListVi
 
     override fun onBindViewHolder(holder: ClassesListViewHolder, position: Int) {
         val currClass = classes[position]
+        val time : String = currClass.horario_inicio.toString() + "h às " + currClass.horario_fim.toString() + "h"
         holder.className.text = currClass.nome_turma
-        holder.hourBegin.text = currClass.horario_inicio.toString()
-        holder.hourEnd.text = currClass.horario_fim.toString()
-        holder.classRoom.text = currClass.sala
-    }
-
-    fun changeDay(currentDay : Int) {
-        this.currentDay = currentDay
-        notifyDataSetChanged()
+        holder.classTime.text = time
+        // TODO : Melhorar atribuição de teoria e pratica
+        holder.classType.text = if (currClass.id_tipo_aula == 0) "TEORIA" else "PRÁTICA"
+        holder.teacherName.text = (currClass.nome_doscente + " " + currClass.sobrenome_doscente).toUpperCase()
+        holder.classRoom.text = currClass.sala.toUpperCase()
     }
 
     fun setData(students: List<Aula>) {

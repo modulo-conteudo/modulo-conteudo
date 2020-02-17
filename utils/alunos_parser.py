@@ -10,7 +10,7 @@ def dump_csv(in_file: str, out_file: str):
         a_class = a_class[1]
 
         _class = {"ra"           : a_class['RA'],
-                  "codigo_turma" : a_class['COD_TURMA']}
+                  "codigo_sie" : a_class['COD_TURMA']}
 
         classes.append(_class)
 
