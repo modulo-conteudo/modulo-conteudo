@@ -25,14 +25,16 @@
         <TextView
             android:id="@+id/home_txtCurrentDay"
             android:text="Segunda-feira"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
             android:layout_marginRight="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintLeft_toRightOf="@id/home_btnPrevious"
             app:layout_constraintRight_toLeftOf="@id/home_btnNext"
             app:layout_constraintTop_toTopOf="@id/home_btnNext"
-            app:layout_constraintBottom_toBottomOf="@id/home_btnNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            app:layout_constraintBottom_toBottomOf="@id/home_btnNext" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/home_btnNext"
@@ -41,6 +43,30 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/home_rgQuinzenal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/home_btnPrevious"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" >
+
+            <RadioButton
+                android:text="@string/quinzenal_1"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <RadioButton
+                android:text="@string/quinzenal_2"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RadioGroup>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

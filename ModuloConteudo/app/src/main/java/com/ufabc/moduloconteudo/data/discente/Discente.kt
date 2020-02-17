@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "discente")
 class Discente (
     @PrimaryKey @ColumnInfo(name = "ra") val ra : String,
-    @ColumnInfo(name = "name") val firstName : String,
-    @ColumnInfo(name = "lastName") val lastName : String
+    @ColumnInfo(name = "nome") val nome: String,
+    @ColumnInfo(name = "sobrenome") val sobrenome: String
 )
 

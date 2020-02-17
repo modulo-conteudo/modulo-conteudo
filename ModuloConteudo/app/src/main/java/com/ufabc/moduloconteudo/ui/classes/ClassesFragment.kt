@@ -1,21 +1,23 @@
 package com.ufabc.moduloconteudo.ui.classes
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ufabc.moduloconteudo.utilities.InjectorUtils
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.adapters.ClassesListAdapter
+import com.ufabc.moduloconteudo.data.aula.Aula
 import com.ufabc.moduloconteudo.utilities.RA_EXTRA
 import kotlinx.android.synthetic.main.fragment_classes.*
 import kotlin.math.max
@@ -28,10 +30,13 @@ class ClassesFragment : Fragment() {
     lateinit var btnNext : Button
     lateinit var txtDay : TextView
     lateinit var recyclerClasses : RecyclerView
+    lateinit var rgQuinzenal : RadioGroup
 
     // Variables
     val classesListAdapter : ClassesListAdapter = ClassesListAdapter()
-    var currentDay : Int = 0
+    val currentDay : MutableLiveData<Int> = MutableLiveData(0)
+    var currentWeek : Int = 1
+    val classes : MutableList<Aula> = mutableListOf()
     var studentRa : String = ""
 
     // ViewModel
@@ -44,20 +49,26 @@ class ClassesFragment : Fragment() {
 
         val days : Array<String> = resources.getStringArray(R.array.days_week)
 
-        // Pegar intent de RA e mandar para viewModel atualizar database
         studentRa = activity?.intent?.getStringExtra(RA_EXTRA) ?: ""
+        Log.d("testPrint", studentRa)
         classesViewModel.searchByRa(studentRa)
 
         bindComponents(root)
         setClickEvents(days)
+        setObservers()
 
         return root
     }
+
 
     private fun bindComponents(root: View) {
         btnPrevious = root.findViewById(R.id.home_btnPrevious)
         btnNext = root.findViewById(R.id.home_btnNext)
         txtDay = root.findViewById(R.id.home_txtCurrentDay)
+
+        rgQuinzenal = root.findViewById(R.id.home_rgQuinzenal)
+
+
         recyclerClasses = root.findViewById(R.id.home_recyclerClasses)
         recyclerClasses.adapter = classesListAdapter
         recyclerClasses.layoutManager = LinearLayoutManager(root.context)
@@ -65,42 +76,46 @@ class ClassesFragment : Fragment() {
 
     private fun setClickEvents(days : Array<String>) {
         btnPrevious.setOnClickListener {
-            currentDay = max(0, currentDay-1)
-            updateTextCurrentDay(days[currentDay])
-            updateClassesList()
+            currentDay.value = max(0, currentDay.value!!-1)
+            updateTextCurrentDay(days[currentDay.value!!])
         }
+
         btnNext.setOnClickListener {
-            currentDay = min(days.size-1, currentDay+1)
-            updateTextCurrentDay(days[currentDay])
+            currentDay.value = min(days.size-1, currentDay.value!!+1)
+            updateTextCurrentDay(days[currentDay.value!!])
+        }
+
+        rgQuinzenal.setOnCheckedChangeListener { group, checkedId ->
+            currentWeek = checkedId
             updateClassesList()
         }
     }
 
     private fun updateClassesList() {
-        Log.d("testPrint", "currDay = " + currentDay)
-        classesListAdapter.changeDay(currentDay)
+        // TODO: Gambiarra?
+        currentDay.value = currentDay.value
     }
 
     private fun updateTextCurrentDay(day : String) {
         home_txtCurrentDay.text = day
     }
 
-    override fun onStart() {
-        super.onStart()
+    private fun setObservers() {
         classesViewModel.classes.observe(this, Observer {
 
-            //TODO: Verificar se existe o elemento 0
-            classesListAdapter.setData(it)
-
-            for(i in it) {
-                Log.d("testPrint", it[0].aulasDiscente.size.toString())
-                for (j in i.aulasDiscente)
-                    Log.d("testPrint", j.codigo_turma)
-            }
+            classes.clear()
+            for(x in it) classes.addAll(x.aulasDiscente)
+            updateClassesList()
         })
 
+        currentDay.observe(this, Observer {
+            val currDayClasses = mutableListOf<Aula>()
+            for(cls in classes)
+                if (cls.id_dia_semana == currentDay.value && (currentWeek == 1 && cls.quinzenal_1 || currentWeek == 2 && cls.quinzenal_2))
+                    currDayClasses.add(cls)
+            classesListAdapter.setData(currDayClasses)
+        })
     }
-
 }
 
 /***********************
