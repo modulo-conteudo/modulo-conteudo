@@ -19,6 +19,7 @@
             android:id="@+id/adapter_className"
             android:text="Nome da disciplina"
             android:textStyle="bold"
+            android:textSize="@dimen/title"
             android:textColor="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,6 +31,7 @@
         <TextView
             android:id="@+id/adapter_classTime"
             android:text="HORARIO"
+            android:textSize="@dimen/body"
             android:textColor="@color/colorBlack"
             android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
@@ -41,6 +43,7 @@
         <TextView
             android:id="@+id/adapter_classType"
             android:text="TIPO"
+            android:textSize="@dimen/body"
             android:textColor="@color/colorBlack"
             android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
@@ -52,6 +55,7 @@
         <TextView
             android:id="@+id/adapter_teacherName"
             android:text="NOME DO PROFESSOR"
+            android:textSize="@dimen/body"
             android:textColor="@color/colorBlack"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
@@ -64,6 +68,7 @@
         <TextView
             android:id="@+id/adapter_classroom"
             android:text="SALA"
+            android:textSize="@dimen/body"
             android:textColor="@color/colorBlack"
             android:layout_marginTop="16dp"
             android:layout_width="wrap_content"

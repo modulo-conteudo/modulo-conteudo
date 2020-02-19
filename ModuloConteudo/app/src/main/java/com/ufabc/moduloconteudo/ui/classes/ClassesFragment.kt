@@ -1,14 +1,12 @@
 package com.ufabc.moduloconteudo.ui.classes
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
@@ -34,6 +32,7 @@ class ClassesFragment : Fragment() {
     lateinit var rgWeek : RadioGroup
     lateinit var rbWeek1 : RadioButton
     lateinit var rbWeek2: RadioButton
+    lateinit var pbClassList : ProgressBar
 
     // Variables
     val classesListAdapter : ClassesListAdapter = ClassesListAdapter()
@@ -65,6 +64,8 @@ class ClassesFragment : Fragment() {
         super.onStart()
         classesViewModel.searchByRa(studentRa)
         rbWeek1.isChecked = true
+        pbClassList.visibility = View.VISIBLE
+        recyclerClasses.visibility = View.GONE
     }
 
 
@@ -76,6 +77,8 @@ class ClassesFragment : Fragment() {
         rgWeek = root.findViewById(R.id.home_rgWeek)
         rbWeek1 = root.findViewById(R.id.home_rbWeek1)
         rbWeek2 = root.findViewById(R.id.home_rbWeek2)
+
+        pbClassList = root.findViewById(R.id.home_pbClassList)
 
         recyclerClasses = root.findViewById(R.id.home_recyclerClasses)
         recyclerClasses.adapter = classesListAdapter
@@ -112,8 +115,15 @@ class ClassesFragment : Fragment() {
     private fun setObservers() {
         classesViewModel.classes.observe(this, Observer {
 
+
             classes.clear()
             for(x in it) classes.addAll(x.aulasDiscente)
+
+            if(classes.size > 0) {
+                pbClassList.visibility = View.GONE
+                recyclerClasses.visibility = View.VISIBLE
+            }
+
             updateClassesList()
         })
 

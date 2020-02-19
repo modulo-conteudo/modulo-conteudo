@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        supportActionBar?.hide()
 
         bindComponents()
         setClickEvents()
@@ -58,11 +60,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setClickEvents() {
         btnLogin.setOnClickListener {
-
             val ra = edtRa.text.toString()
             loginViewModel.searchByRa(ra)
-
-
         }
     }
 
