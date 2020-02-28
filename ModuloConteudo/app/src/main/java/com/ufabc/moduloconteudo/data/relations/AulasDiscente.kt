@@ -9,6 +9,6 @@ data class AulasDiscente (
     @Embedded
     val discenteTurma : DiscenteTurma,
 
-    @Relation(parentColumn = "codigo_turma", entityColumn = "codigo_turma")
+    @Relation(parentColumn = "codigo_sie", entityColumn = "codigo_sie")
     val aulasDiscente : List<Aula> = emptyList()
 )
