@@ -13,6 +13,7 @@
     <string name="quinzenal_1">Quinzenal 1</string>
     <string name="quinzenal_2">Quinzenal 2</string>
     <string-array name="days_week">
+        <item>Domingo</item>
         <item>Segunda-feira</item>
         <item>Terça-feira</item>
         <item>Quarta-feira</item>

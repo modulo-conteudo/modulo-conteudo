@@ -1,32 +1,19 @@
 package com.ufabc.moduloconteudo.utilities
 
-fun biweekly(d: Int, m: Int, y: Int): Int {
-    // first days of quarters (counting from 01/01/2020)
-    val q1_first_day_offset = 41
-    val q2_first_day_offset = 153
-    val q3_first_day_offset = 265
+import android.util.Log
+import java.util.*
 
-    val m_days = arrayOf(31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
-    var day_offset = d
-    for (i in 0..(m-2)) day_offset += m_days[i]
+class AppUtils {
+    companion object {
+        fun biweekly(d: Int, m: Int, y: Int): Int {
+            val currDate = Calendar.getInstance()
+            currDate.set(y, m, d)
+            val q1FirstDay = Calendar.getInstance()
+            q1FirstDay.set(2020, 2, 10)
 
-
-    // first days of quarters
-    if (day_offset >= q1_first_day_offset && day_offset < q2_first_day_offset) {
-        day_offset -= q1_first_day_offset
-
-    } else if (day_offset >= q2_first_day_offset && day_offset < q3_first_day_offset) {
-        day_offset -= q2_first_day_offset
-
-    } else if (day_offset >= q3_first_day_offset) {
-        day_offset -= q3_first_day_offset
-    }
-
-    val week_offset = day_offset / 7
-
-    if (week_offset % 2 == 0) {
-        return 1
-    } else {
-        return 2
+            val week = (currDate.timeInMillis - q1FirstDay.timeInMillis)/(7*24*60*60*1000)
+            Log.d("debugPrint", "week = {$week}")
+            return if (week%2L == 0L) 1 else 2
+        }
     }
 }

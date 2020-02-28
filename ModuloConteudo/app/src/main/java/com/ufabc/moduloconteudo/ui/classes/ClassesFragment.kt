@@ -1,6 +1,5 @@
 package com.ufabc.moduloconteudo.ui.classes
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,8 +16,10 @@ import com.ufabc.moduloconteudo.utilities.InjectorUtils
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.adapters.ClassesListAdapter
 import com.ufabc.moduloconteudo.data.aula.Aula
+import com.ufabc.moduloconteudo.utilities.AppUtils
 import com.ufabc.moduloconteudo.utilities.RA_EXTRA
 import kotlinx.android.synthetic.main.fragment_classes.*
+import java.util.*
 import kotlin.math.max
 import kotlin.math.min
 
@@ -40,21 +41,39 @@ class ClassesFragment : Fragment() {
     var currentWeek : Int = 1
     val classes : MutableList<Aula> = mutableListOf()
     var studentRa : String = ""
+    val calendar = Calendar.getInstance()
+    var daysOfWeek : Array<String> = arrayOf()
+
 
     // ViewModel
     private val classesViewModel : ClassesViewModel by viewModels {
         InjectorUtils.provideTurmaViewModelFactory(requireContext())
     }
 
+    private fun updateClassesList() {
+        // TODO: Gambiarra?
+        currentDay.value = currentDay.value
+    }
+
+    private fun updateTextCurrentDay(day : Int) {
+        home_txtCurrentDay.text = daysOfWeek[day]
+    }
+
+    private fun setCurrWeek(weekType: Int) {
+        currentWeek = weekType
+        if (currentWeek == 1) rbWeek1.isChecked = true
+        if (currentWeek == 2) rbWeek2.isChecked = true
+    }
+
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
         val root = inflater.inflate(R.layout.fragment_classes, container, false)
 
-        val days : Array<String> = resources.getStringArray(R.array.days_week)
 
         studentRa = activity?.intent?.getStringExtra(RA_EXTRA) ?: ""
+        daysOfWeek = resources.getStringArray(R.array.days_week)
 
         bindComponents(root)
-        setClickEvents(days)
+        setClickEvents()
         setObservers()
 
         return root
@@ -62,12 +81,30 @@ class ClassesFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
         classesViewModel.searchByRa(studentRa)
-        rbWeek1.isChecked = true
         pbClassList.visibility = View.VISIBLE
         recyclerClasses.visibility = View.GONE
+
+
+        val day = calendar.get(Calendar.DAY_OF_MONTH)+7
+        val month = calendar.get(Calendar.MONTH)
+        val year = calendar.get(Calendar.YEAR)
+        val weekType = AppUtils.biweekly(day, month, year)
+
+        setCurrWeek(weekType)
+        setCurrentDay(calendar.get(Calendar.DAY_OF_WEEK)-1)
+
+        updateTextCurrentDay(currentDay.value!!)
+        updateClassesList()
+
+        Log.d("debugPrint: ", "currentDay = {${currentDay.value}}")
+        Log.d("debugPrint: ", "currentWeek = {${currentWeek}}")
     }
 
+    private fun setCurrentDay(day: Int) {
+        currentDay.value = max(0, min(daysOfWeek.size-1, day))
+    }
 
     private fun bindComponents(root: View) {
         btnPrevious = root.findViewById(R.id.home_btnPrevious)
@@ -85,36 +122,26 @@ class ClassesFragment : Fragment() {
         recyclerClasses.layoutManager = LinearLayoutManager(root.context)
     }
 
-    private fun setClickEvents(days : Array<String>) {
+    private fun setClickEvents() {
         btnPrevious.setOnClickListener {
-            currentDay.value = max(0, currentDay.value!!-1)
-            updateTextCurrentDay(days[currentDay.value!!])
+            setCurrentDay(currentDay.value!!-1)
+            updateTextCurrentDay(currentDay.value!!)
         }
 
         btnNext.setOnClickListener {
-            currentDay.value = min(days.size-1, currentDay.value!!+1)
-            updateTextCurrentDay(days[currentDay.value!!])
+            setCurrentDay(currentDay.value!!+1)
+            updateTextCurrentDay(currentDay.value!!)
         }
 
-        rgWeek.setOnCheckedChangeListener { group, checkedId ->
+        rgWeek.setOnCheckedChangeListener { _, checkedId ->
             if(checkedId == rbWeek1.id) currentWeek = 1
             if(checkedId == rbWeek2.id) currentWeek = 2
             updateClassesList()
         }
     }
 
-    private fun updateClassesList() {
-        // TODO: Gambiarra?
-        currentDay.value = currentDay.value
-    }
-
-    private fun updateTextCurrentDay(day : String) {
-        home_txtCurrentDay.text = day
-    }
-
     private fun setObservers() {
         classesViewModel.classes.observe(this, Observer {
-
 
             classes.clear()
             for(x in it) classes.addAll(x.aulasDiscente)
@@ -137,11 +164,3 @@ class ClassesFragment : Fragment() {
     }
 }
 
-/***********************
-// Inserir estudante
-btnInsert.setOnClickListener {
-    runBlocking {
-        classesViewModel.insertDiscente(App.context, Discente(edtRa.text.toString(), "wesley", "pereira"))
-    }
-}
- ********************/
