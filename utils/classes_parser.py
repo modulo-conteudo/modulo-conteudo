@@ -2,8 +2,8 @@ import json, xlrd, sys
 import pandas as pd
 
 
-DAY_MAP = {'segunda':0, 'terca':1, 'quarta':2, 'quinta':3,
-           'sexta':4, 'sabado':5}
+DAY_MAP = {'domingo':0,'segunda':1, 'terca':2, 'quarta':3, 'quinta':4,
+           'sexta':5, 'sabado':6}
 
 
 def get_xlsx_header(file_name: str):
