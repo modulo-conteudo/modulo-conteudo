@@ -44,27 +44,6 @@ class ClassesFragment : Fragment() {
     val calendar = Calendar.getInstance()
     var daysOfWeek : Array<String> = arrayOf()
 
-
-    // ViewModel
-    private val classesViewModel : ClassesViewModel by viewModels {
-        InjectorUtils.provideTurmaViewModelFactory(requireContext())
-    }
-
-    private fun updateClassesList() {
-        // TODO: Gambiarra?
-        currentDay.value = currentDay.value
-    }
-
-    private fun updateTextCurrentDay(day : Int) {
-        home_txtCurrentDay.text = daysOfWeek[day]
-    }
-
-    private fun setCurrWeek(weekType: Int) {
-        currentWeek = weekType
-        if (currentWeek == 1) rbWeek1.isChecked = true
-        if (currentWeek == 2) rbWeek2.isChecked = true
-    }
-
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
         val root = inflater.inflate(R.layout.fragment_classes, container, false)
 
@@ -73,11 +52,13 @@ class ClassesFragment : Fragment() {
         daysOfWeek = resources.getStringArray(R.array.days_week)
 
         bindComponents(root)
+        setupClassesAdapter(root)
         setClickEvents()
         setObservers()
 
         return root
     }
+
 
     override fun onStart() {
         super.onStart()
@@ -98,12 +79,11 @@ class ClassesFragment : Fragment() {
         updateTextCurrentDay(currentDay.value!!)
         updateClassesList()
 
-        Log.d("debugPrint: ", "currentDay = {${currentDay.value}}")
-        Log.d("debugPrint: ", "currentWeek = {${currentWeek}}")
     }
 
-    private fun setCurrentDay(day: Int) {
-        currentDay.value = max(0, min(daysOfWeek.size-1, day))
+    // ViewModel
+    private val classesViewModel : ClassesViewModel by viewModels {
+        InjectorUtils.provideTurmaViewModelFactory(requireContext())
     }
 
     private fun bindComponents(root: View) {
@@ -118,8 +98,31 @@ class ClassesFragment : Fragment() {
         pbClassList = root.findViewById(R.id.home_pbClassList)
 
         recyclerClasses = root.findViewById(R.id.home_recyclerClasses)
+    }
+
+    private fun setupClassesAdapter(root : View) {
         recyclerClasses.adapter = classesListAdapter
         recyclerClasses.layoutManager = LinearLayoutManager(root.context)
+    }
+
+    private fun updateClassesList() {
+        // TODO: Gambiarra?
+        currentDay.value = currentDay.value
+    }
+
+    private fun updateTextCurrentDay(day : Int) {
+        home_txtCurrentDay.text = daysOfWeek[day]
+    }
+
+    private fun setCurrWeek(weekType: Int) {
+        currentWeek = weekType
+        if (currentWeek == 1) rbWeek1.isChecked = true
+        if (currentWeek == 2) rbWeek2.isChecked = true
+    }
+
+
+    private fun setCurrentDay(day: Int) {
+        currentDay.value = max(0, min(daysOfWeek.size-1, day))
     }
 
     private fun setClickEvents() {

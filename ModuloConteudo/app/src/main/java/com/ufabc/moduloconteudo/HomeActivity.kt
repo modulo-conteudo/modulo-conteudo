@@ -1,6 +1,8 @@
 package com.ufabc.moduloconteudo
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -15,6 +17,11 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
+
+        val fab : View = findViewById(R.id.home_fab)
+        fab.setOnClickListener { view ->
+            Toast.makeText(this, "Abrir video com tradução em Libras", Toast.LENGTH_SHORT).show()
+        }
 
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
