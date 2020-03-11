@@ -5,9 +5,52 @@
     android:layout_height="match_parent"
     tools:context=".ui.configuration.ConfigurationFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/example_text"
+            android:layout_width="match_parent"
+            android:layout_height="80sp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="@string/example_text"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            tools:text="@string/example_text_value" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:orientation="vertical">
+
+                <Switch
+                    android:id="@+id/bold_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/config_negrito" />
+
+                <Switch
+                    android:id="@+id/high_contrast_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/high_c_switch_value" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
 </FrameLayout>
