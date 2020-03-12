@@ -16,6 +16,7 @@
     <string name="example_text_value">Exemplo</string>
     <string name="config_negrito">Negrito</string>
     <string name="high_c_switch_value">Alto contraste</string>
+    <string name="config_big_text_value">Texto grande</string>
     <string-array name="days_week">
         <item>Domingo</item>
         <item>Segunda-feira</item>

@@ -3,22 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:textStyle="bold"
     tools:context=".ui.configuration.ConfigurationFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/example_text"
             android:layout_width="match_parent"
             android:layout_height="80sp"
             android:layout_marginBottom="8dp"
+            android:background="#00FFFFFF"
             android:gravity="center"
-            android:text="@string/example_text"
+            android:text="@string/example_text_value"
             android:textAlignment="center"
-            android:textSize="14sp"
+            android:textSize="@dimen/config_view_text"
             tools:text="@string/example_text_value" />
 
         <View
@@ -29,7 +31,9 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#00CC3131"
+            android:backgroundTint="#006F0D0D">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,13 +45,22 @@
                     android:id="@+id/bold_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/config_negrito" />
+                    android:text="@string/config_negrito"
+                    android:textSize="@dimen/config_view_text" />
 
                 <Switch
                     android:id="@+id/high_contrast_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/high_c_switch_value" />
+                    android:text="@string/high_c_switch_value"
+                    android:textSize="@dimen/config_view_text" />
+
+                <Switch
+                    android:id="@+id/big_text_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/config_big_text_value"
+                    android:textSize="@dimen/config_view_text" />
 
             </LinearLayout>
         </ScrollView>
