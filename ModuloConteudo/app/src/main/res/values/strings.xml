@@ -12,6 +12,8 @@
     <string name="btn_ok">Ok!</string>
     <string name="quinzenal_1">Quinzenal 1</string>
     <string name="quinzenal_2">Quinzenal 2</string>
+    <string name="btn_proximo">Próximo</string>
+    <string name="btn_anterior">Anterior</string>
     <string-array name="days_week">
         <item>Domingo</item>
         <item>Segunda-feira</item>

@@ -1,10 +1,12 @@
 package com.ufabc.moduloconteudo
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -62,6 +64,8 @@ class LoginActivity : AppCompatActivity() {
         btnLogin.setOnClickListener {
             val ra = edtRa.text.toString()
             loginViewModel.searchByRa(ra)
+            (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+                .hideSoftInputFromWindow(it.windowToken, 0)
         }
     }
 

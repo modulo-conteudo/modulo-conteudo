@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ufabc.moduloconteudo.utilities.InjectorUtils
@@ -26,8 +27,8 @@ import kotlin.math.min
 class ClassesFragment : Fragment() {
 
     // Components
-    lateinit var btnPrevious : Button
-    lateinit var btnNext : Button
+    lateinit var btnPrevious : ImageButton
+    lateinit var btnNext : ImageButton
     lateinit var txtDay : TextView
     lateinit var recyclerClasses : RecyclerView
     lateinit var rgWeek : RadioGroup
@@ -59,14 +60,12 @@ class ClassesFragment : Fragment() {
         return root
     }
 
-
     override fun onStart() {
         super.onStart()
 
         classesViewModel.searchByRa(studentRa)
         pbClassList.visibility = View.VISIBLE
         recyclerClasses.visibility = View.GONE
-
 
         val day = calendar.get(Calendar.DAY_OF_MONTH)+7
         val month = calendar.get(Calendar.MONTH)
@@ -101,8 +100,9 @@ class ClassesFragment : Fragment() {
     }
 
     private fun setupClassesAdapter(root : View) {
-        recyclerClasses.adapter = classesListAdapter
         recyclerClasses.layoutManager = LinearLayoutManager(root.context)
+        recyclerClasses.adapter = classesListAdapter
+        //recyclerClasses.addItemDecoration(DividerItemDecoration(context,LinearLayoutManager.VERTICAL))
     }
 
     private fun updateClassesList() {
@@ -162,6 +162,7 @@ class ClassesFragment : Fragment() {
             for(cls in classes)
                 if (cls.id_dia_semana == currentDay.value && (currentWeek == 1 && cls.quinzenal_1 || currentWeek == 2 && cls.quinzenal_2))
                     currDayClasses.add(cls)
+            currDayClasses.sortWith(compareBy( {it.horario_inicio}, {it.codigo_sie}))
             classesListAdapter.setData(currDayClasses)
         })
     }
