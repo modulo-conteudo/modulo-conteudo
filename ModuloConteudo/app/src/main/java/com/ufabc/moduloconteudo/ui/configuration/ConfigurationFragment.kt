@@ -1,19 +1,21 @@
 package com.ufabc.moduloconteudo.ui.configuration
 
+//import timber.log.Timber
+//import android.R
 import android.content.Context
 import android.graphics.Typeface
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
+import android.widget.TextView
 import android.widget.Toast
-//import timber.log.Timber
-import com.ufabc.moduloconteudo.R
+import android.widget.Toast.makeText
+import androidx.core.view.children
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_configuration.view.*
-import android.widget.Toast.makeText as makeText
+import com.ufabc.moduloconteudo.R
 
 //import android.widget.Toast.makeText as makeText1
 
@@ -35,8 +37,8 @@ class ConfigurationFragment : Fragment() {
 
         // Listener for bold text switch
         view.bold_switch.setOnCheckedChangeListener { btn, isChecked ->
-            boldOnSwitchEventAction(btn, isChecked)
-            overridefonts(context, "font", "font")
+            boldOnSwitchEventAction(view, isChecked)
+//            overridefonts(context, "SERIF","R.font.precious.ttf")
         }
 
         // Listener for high contrast text switch
@@ -54,14 +56,15 @@ class ConfigurationFragment : Fragment() {
         return view
     }
 
-    private fun boldOnSwitchEventAction(btn : CompoundButton, isChecked: Boolean) {
-        if (isChecked) {
-            makeText(activity, "Switch1:ON", Toast.LENGTH_SHORT).show()
-
-        } else  {
-            makeText(activity, "Switch1:OFF", Toast.LENGTH_SHORT).show()
-
-
+    private fun boldOnSwitchEventAction(view : View, isChecked: Boolean) {
+        for (v in view.getAllViews()) {
+            if (v is TextView) {
+                if (isChecked) {
+                    v.setTypeface(Typeface.DEFAULT_BOLD)
+                } else {
+                    v.setTypeface(Typeface.DEFAULT)
+                }
+            }
         }
     }
 
@@ -74,13 +77,26 @@ class ConfigurationFragment : Fragment() {
 
     }
 
+    private fun View.getAllViews(): List<View> {
+        if (this !is ViewGroup || childCount == 0) return listOf(this)
+        return children
+            .toList()
+            .flatMap { it.getAllViews() }
+            .plus(this as View)
+    }
+
+
+    // Não to usando isso pra nada, vou deixar só pra caso precise
     fun overridefonts(context: Context?, defaultFontToOverride:String, customFontFileNameInAssets:String){
         try {
-            val customTypeface = Typeface.createFromAsset(context.assets,customFontFileNameInAssets)
+            val customTypeface = Typeface.createFromAsset(context?.assets,customFontFileNameInAssets)
             val defaultTypefaceField = Typeface::class.java.getDeclaredField(defaultFontToOverride)
             defaultTypefaceField.isAccessible = true
             defaultTypefaceField.set(null,customTypeface)
-        }catch (e:Exception){
+            makeText(activity, "DEU BOM", Toast.LENGTH_SHORT).show()
+        } catch (e:Exception){
+//            makeText(activity, "${e.toString()}", Toast.LENGTH_SHORT).show()
+            makeText(activity, "Cannot set font $customFontFileNameInAssets instead of $defaultFontToOverride", Toast.LENGTH_SHORT).show()
 //            Timber.e("Cannot set font $customFontFileNameInAssets instead of $defaultFontToOverride")
         }
     }
