@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.core.view.children
@@ -21,7 +20,6 @@ import com.ufabc.moduloconteudo.R
 
 class ConfigurationFragment : Fragment() {
 
-
     companion object {
         fun newInstance() = ConfigurationFragment()
     }
@@ -32,13 +30,16 @@ class ConfigurationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         val view : View = inflater.inflate(R.layout.fragment_configuration, container, false)
+        // This sets the default boldness of a view in onCreate time
+        BoldConfigurationSingleton.setBoldnessOnAllViews(view)
+        BoldConfigurationSingleton.setSwitchPositioning(view.bold_switch)
 
-
-        // Listener for bold text switch
-        view.bold_switch.setOnCheckedChangeListener { btn, isChecked ->
-            boldOnSwitchEventAction(view, isChecked)
-//            overridefonts(context, "SERIF","R.font.precious.ttf")
+        // Listener for bold text switch on runtime
+        view.bold_switch.setOnCheckedChangeListener { btn, _ ->
+            BoldConfigurationSingleton.switchBoldnessOnAllViews(view, btn)
         }
 
         // Listener for high contrast text switch
@@ -56,17 +57,7 @@ class ConfigurationFragment : Fragment() {
         return view
     }
 
-    private fun boldOnSwitchEventAction(view : View, isChecked: Boolean) {
-        for (v in view.getAllViews()) {
-            if (v is TextView) {
-                if (isChecked) {
-                    v.setTypeface(Typeface.DEFAULT_BOLD)
-                } else {
-                    v.setTypeface(Typeface.DEFAULT)
-                }
-            }
-        }
-    }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -76,29 +67,4 @@ class ConfigurationFragment : Fragment() {
 
 
     }
-
-    private fun View.getAllViews(): List<View> {
-        if (this !is ViewGroup || childCount == 0) return listOf(this)
-        return children
-            .toList()
-            .flatMap { it.getAllViews() }
-            .plus(this as View)
-    }
-
-
-    // Não to usando isso pra nada, vou deixar só pra caso precise
-    fun overridefonts(context: Context?, defaultFontToOverride:String, customFontFileNameInAssets:String){
-        try {
-            val customTypeface = Typeface.createFromAsset(context?.assets,customFontFileNameInAssets)
-            val defaultTypefaceField = Typeface::class.java.getDeclaredField(defaultFontToOverride)
-            defaultTypefaceField.isAccessible = true
-            defaultTypefaceField.set(null,customTypeface)
-            makeText(activity, "DEU BOM", Toast.LENGTH_SHORT).show()
-        } catch (e:Exception){
-//            makeText(activity, "${e.toString()}", Toast.LENGTH_SHORT).show()
-            makeText(activity, "Cannot set font $customFontFileNameInAssets instead of $defaultFontToOverride", Toast.LENGTH_SHORT).show()
-//            Timber.e("Cannot set font $customFontFileNameInAssets instead of $defaultFontToOverride")
-        }
-    }
-
 }

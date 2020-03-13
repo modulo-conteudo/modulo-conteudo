@@ -16,6 +16,7 @@ import com.ufabc.moduloconteudo.utilities.InjectorUtils
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.adapters.ClassesListAdapter
 import com.ufabc.moduloconteudo.data.aula.Aula
+import com.ufabc.moduloconteudo.ui.configuration.BoldConfigurationSingleton
 import com.ufabc.moduloconteudo.utilities.AppUtils
 import com.ufabc.moduloconteudo.utilities.RA_EXTRA
 import kotlinx.android.synthetic.main.fragment_classes.*
@@ -47,7 +48,6 @@ class ClassesFragment : Fragment() {
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
         val root = inflater.inflate(R.layout.fragment_classes, container, false)
 
-
         studentRa = activity?.intent?.getStringExtra(RA_EXTRA) ?: ""
         daysOfWeek = resources.getStringArray(R.array.days_week)
 
@@ -55,7 +55,7 @@ class ClassesFragment : Fragment() {
         setupClassesAdapter(root)
         setClickEvents()
         setObservers()
-
+        BoldConfigurationSingleton.setBoldnessOnAllViews(root)
         return root
     }
 
