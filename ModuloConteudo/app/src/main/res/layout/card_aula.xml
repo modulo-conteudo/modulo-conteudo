@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     app:cardElevation="8dp"
-    android:layout_margin="16dp"
+    android:layout_margin="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -30,21 +30,22 @@
 
         <TextView
             android:id="@+id/adapter_classTime"
-            android:text="HORARIO"
-            android:textSize="@dimen/body"
-            android:textColor="@color/colorDarkGrey"
-            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/adapter_className"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif"
+            android:text="HORARIO"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/body"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/adapter_className" />
 
         <TextView
             android:id="@+id/adapter_classType"
             android:text="TIPO"
             android:textSize="@dimen/body"
-            android:textColor="@color/colorDarkGrey"
+            android:textColor="@color/colorBlack"
             android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,7 +57,7 @@
             android:id="@+id/adapter_teacherName"
             android:text="NOME DO PROFESSOR"
             android:textSize="@dimen/body"
-            android:textColor="@color/colorDarkGrey"
+            android:textColor="@color/colorBlack"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,7 +70,7 @@
             android:id="@+id/adapter_classroom"
             android:text="SALA"
             android:textSize="@dimen/body"
-            android:textColor="@color/colorDarkGrey"
+            android:textColor="@color/colorBlack"
             android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
