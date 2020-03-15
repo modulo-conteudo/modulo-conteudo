@@ -21,6 +21,7 @@ import com.ufabc.moduloconteudo.adapters.ArchiveClassNumberListAdapter
 import com.ufabc.moduloconteudo.data.ClassDocument
 import com.ufabc.moduloconteudo.data.ClassName
 import com.ufabc.moduloconteudo.data.ClassNumber
+import com.ufabc.moduloconteudo.ui.configuration.BoldConfigurationSingleton
 
 class ArchivesFragment : Fragment() {
 
@@ -76,7 +77,7 @@ class ArchivesFragment : Fragment() {
         setObservers(root)
         setButtonClickEvents(root)
         //deepLevel.value = 0
-
+        BoldConfigurationSingleton.setBoldnessOnAllViews(root)
         return root
     }
 
@@ -84,6 +85,7 @@ class ArchivesFragment : Fragment() {
         recyclerArchives = root.findViewById(R.id.archives_recycler_archives)
         btnBack = root.findViewById(R.id.archives_btn_back)
         txtHistory = root.findViewById(R.id.archives_txt_history)
+
     }
 
     private fun setButtonClickEvents(root: View) {
@@ -92,6 +94,7 @@ class ArchivesFragment : Fragment() {
                 deepLevel.value = deepLevel.value!! - 1
             }
         }
+        BoldConfigurationSingleton.setBoldnessOnAllViews(root)
     }
 
     private fun setObservers(root : View) {
