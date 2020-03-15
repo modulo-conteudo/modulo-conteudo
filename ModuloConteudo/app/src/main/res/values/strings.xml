@@ -12,8 +12,13 @@
     <string name="btn_ok">Ok!</string>
     <string name="quinzenal_1">Quinzenal 1</string>
     <string name="quinzenal_2">Quinzenal 2</string>
+    <string name="example_text">example_text</string>
+    <string name="example_text_value">Exemplo</string>
+    <string name="config_negrito">Negrito</string>
     <string name="btn_proximo">Próximo</string>
     <string name="btn_anterior">Anterior</string>
+    <string name="high_c_switch_value">Alto contraste</string>
+    <string name="config_big_text_value">Texto grande</string>
     <string-array name="days_week">
         <item>Domingo</item>
         <item>Segunda-feira</item>
