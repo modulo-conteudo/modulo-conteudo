@@ -11,7 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 
 class HomeActivity : AppCompatActivity() {
-
+     // Modificação qualquer só para testar se as funcionalidades do AS com o git estão funcionando direito
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
