@@ -20,7 +20,7 @@
         android:id="@+id/archives_txt_history"
         android:text="/"
         android:textSize="14dp"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorDarkGrey"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"

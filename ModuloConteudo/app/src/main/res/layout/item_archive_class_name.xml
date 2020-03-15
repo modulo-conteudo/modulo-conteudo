@@ -8,7 +8,7 @@
         android:id="@+id/adapter_className"
         android:text="CLASS"
         android:textSize="18sp"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorDarkGrey"
         android:layout_margin="16dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -15,6 +15,8 @@
     <string name="example_text">example_text</string>
     <string name="example_text_value">Exemplo</string>
     <string name="config_negrito">Negrito</string>
+    <string name="btn_proximo">Próximo</string>
+    <string name="btn_anterior">Anterior</string>
     <string name="high_c_switch_value">Alto contraste</string>
     <string name="config_big_text_value">Texto grande</string>
     <string-array name="days_week">
