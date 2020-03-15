@@ -1,5 +1,8 @@
 package com.ufabc.moduloconteudo.ui.archives
 
+import android.content.Intent
+import android.net.Uri
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -100,7 +103,13 @@ class ArchivesFragment : Fragment() {
             if(it == 1) setupClassNumbersAdapter(root)
             if(it == 2) setupClassDocumentsAdapter(root)
             updateHistory(it)
+            updateBackButtonVisibility(it)
         })
+    }
+
+    private fun updateBackButtonVisibility(level: Int?) {
+        if(level == 0) btnBack.visibility = View.INVISIBLE
+        else btnBack.visibility = View.VISIBLE
     }
 
     private fun updateHistory(level: Int) {
@@ -143,7 +152,10 @@ class ArchivesFragment : Fragment() {
         recyclerArchives.layoutManager = LinearLayoutManager(root.context)
 
         classesDocumentListAdapter.onItemClick = { classDocument, position ->
-            Toast.makeText(root.context, "${classDocument.url}", Toast.LENGTH_SHORT).show()
+            if(position == 0)startActivity(Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://www.ime.usp.br/~schultz/maratona-ufsc/slides/2010-04-23-teorema-mestre.pdf")))
+            else Toast.makeText(root.context, "${classDocument.url}", Toast.LENGTH_SHORT).show()
         }
 
         classesDocumentListAdapter.setData(classDocuments)

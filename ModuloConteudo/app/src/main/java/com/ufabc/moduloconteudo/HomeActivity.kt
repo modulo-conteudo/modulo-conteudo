@@ -18,7 +18,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-        val fab : View = findViewById(R.id.home_fab)
+        val fab : View = findViewById(R.id.fab_libras)
         fab.setOnClickListener { view ->
             Toast.makeText(this, "Abrir video com tradução em Libras", Toast.LENGTH_SHORT).show()
         }
@@ -34,6 +34,7 @@ class HomeActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        //FIXME: Pegar informações da tela condigurações
         navView.itemIconSize = 120
     }
 }
