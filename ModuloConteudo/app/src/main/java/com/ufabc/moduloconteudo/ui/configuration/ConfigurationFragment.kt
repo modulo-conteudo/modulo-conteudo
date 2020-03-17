@@ -2,15 +2,12 @@ package com.ufabc.moduloconteudo.ui.configuration
 
 //import timber.log.Timber
 //import android.R
-import android.content.Context
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import android.widget.Toast.makeText
-import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_configuration.view.*
@@ -33,13 +30,16 @@ class ConfigurationFragment : Fragment() {
 
 
         val view : View = inflater.inflate(R.layout.fragment_configuration, container, false)
+
         // This sets the default boldness of a view in onCreate time
-        BoldConfigurationSingleton.setBoldnessOnAllViews(view)
-        BoldConfigurationSingleton.setSwitchPositioning(view.bold_switch)
+        ConfigurationSingleton.setBoldnessOnAllViews(view)
+
+
+        ConfigurationSingleton.setSwitchPositioning(view.bold_switch)
 
         // Listener for bold text switch on runtime
         view.bold_switch.setOnCheckedChangeListener { btn, _ ->
-            BoldConfigurationSingleton.switchBoldnessOnAllViews(view, btn)
+            ConfigurationSingleton.switchBoldnessOnAllViews(view, btn)
         }
 
         // Listener for high contrast text switch
@@ -64,7 +64,5 @@ class ConfigurationFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel::class.java)
 
         // TODO: Use ViewModel
-
-
     }
 }

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.data.ClassDocument
-import com.ufabc.moduloconteudo.ui.configuration.BoldConfigurationSingleton
+import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
 import kotlinx.android.synthetic.main.item_archive_class_document.view.*
 
 class ArchiveClassDocumentListAdapter : RecyclerView.Adapter<ArchiveClassDocumentListAdapter.ArchiveClassDocumentListViewHolder> () {
@@ -31,7 +31,7 @@ class ArchiveClassDocumentListAdapter : RecyclerView.Adapter<ArchiveClassDocumen
 
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): ArchiveClassDocumentListViewHolder {
         var arch_root = LayoutInflater.from(parent.context).inflate(R.layout.item_archive_class_document, parent, false)
-        BoldConfigurationSingleton.setBoldnessOnAllViews(arch_root)
+        ConfigurationSingleton.setBoldnessOnAllViews(arch_root)
         return ArchiveClassDocumentListViewHolder(arch_root)
     }
 

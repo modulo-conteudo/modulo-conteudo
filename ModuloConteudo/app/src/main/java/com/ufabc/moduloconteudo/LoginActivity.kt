@@ -5,6 +5,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
@@ -14,8 +17,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import com.ufabc.moduloconteudo.App.Companion.context
+import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
 import com.ufabc.moduloconteudo.utilities.InjectorUtils
 import com.ufabc.moduloconteudo.utilities.RA_EXTRA
+import kotlinx.android.synthetic.main.activity_home.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -28,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
         InjectorUtils.provideDiscenteViewModelFactory(App.context)
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -37,6 +44,8 @@ class LoginActivity : AppCompatActivity() {
         setClickEvents()
         setObservers()
     }
+
+
 
     private fun setObservers() {
         studentRa.observe(this, Observer {

@@ -2,9 +2,7 @@ package com.ufabc.moduloconteudo.ui.archives
 
 import android.content.Intent
 import android.net.Uri
-import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +22,7 @@ import com.ufabc.moduloconteudo.adapters.ArchiveClassNumberListAdapter
 import com.ufabc.moduloconteudo.data.ClassDocument
 import com.ufabc.moduloconteudo.data.ClassName
 import com.ufabc.moduloconteudo.data.ClassNumber
-import com.ufabc.moduloconteudo.ui.configuration.BoldConfigurationSingleton
+import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
 
 class ArchivesFragment : Fragment() {
 
@@ -80,7 +78,7 @@ class ArchivesFragment : Fragment() {
         setObservers(root)
         setButtonClickEvents(root)
         //deepLevel.value = 0
-        BoldConfigurationSingleton.setBoldnessOnAllViews(root)
+        ConfigurationSingleton.setBoldnessOnAllViews(root)
         return root
     }
 
@@ -97,7 +95,7 @@ class ArchivesFragment : Fragment() {
                 deepLevel.value = deepLevel.value!! - 1
             }
         }
-        BoldConfigurationSingleton.setBoldnessOnAllViews(root)
+        ConfigurationSingleton.setBoldnessOnAllViews(root)
     }
 
     private fun setObservers(root : View) {
