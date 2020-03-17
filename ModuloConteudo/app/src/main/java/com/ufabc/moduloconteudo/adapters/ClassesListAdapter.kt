@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.data.aula.Aula
-import com.ufabc.moduloconteudo.ui.configuration.BoldConfigurationSingleton
+import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
 import kotlinx.android.synthetic.main.card_aula.view.*
 
 class ClassesListAdapter : RecyclerView.Adapter<ClassesListAdapter.ClassesListViewHolder>() {
@@ -22,7 +22,7 @@ class ClassesListAdapter : RecyclerView.Adapter<ClassesListAdapter.ClassesListVi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassesListViewHolder {
         val card_root = LayoutInflater.from(parent.context).inflate(R.layout.card_aula, parent, false)
-        BoldConfigurationSingleton.setBoldnessOnAllViews(card_root)
+        ConfigurationSingleton.setBoldnessOnAllViews(card_root)
         return ClassesListViewHolder(card_root)
 //        return card_root
     }

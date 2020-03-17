@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.ufabc.moduloconteudo.R
-import com.ufabc.moduloconteudo.ui.configuration.BoldConfigurationSingleton
+import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
 
 class TutorialFragment : Fragment() {
 
@@ -29,7 +29,7 @@ class TutorialFragment : Fragment() {
             textView.text = it
         })
 
-        BoldConfigurationSingleton.setBoldnessOnAllViews(root)
+        ConfigurationSingleton.setBoldnessOnAllViews(root)
 
         return root
     }
