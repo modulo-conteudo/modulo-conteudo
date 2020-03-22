@@ -30,7 +30,7 @@ class ArchiveClassNameListAdapter : RecyclerView.Adapter<ArchiveClassNameListAda
 
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): ArchiveClassNameListViewHolder {
         var arch_list_root = LayoutInflater.from(parent.context).inflate(R.layout.item_archive_class_name, parent, false)
-        ConfigurationSingleton.setBoldnessOnAllViews(arch_list_root)
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(arch_list_root)
         return ArchiveClassNameListViewHolder(arch_list_root)
     }
 

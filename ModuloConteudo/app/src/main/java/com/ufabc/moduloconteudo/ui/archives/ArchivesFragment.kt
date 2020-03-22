@@ -78,7 +78,7 @@ class ArchivesFragment : Fragment() {
         setObservers(root)
         setButtonClickEvents(root)
         //deepLevel.value = 0
-        ConfigurationSingleton.setBoldnessOnAllViews(root)
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(root)
         return root
     }
 

@@ -16,6 +16,7 @@ import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.adapters.ClassesListAdapter
 import com.ufabc.moduloconteudo.data.aula.Aula
 import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
+import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton.persistConfigModificationsOnAllViews
 import com.ufabc.moduloconteudo.utilities.AppUtils
 import com.ufabc.moduloconteudo.utilities.RA_EXTRA
 import kotlinx.android.synthetic.main.fragment_classes.*
@@ -56,7 +57,7 @@ class ClassesFragment : Fragment() {
         setObservers()
 
         ConfigurationSingleton.init(context)
-        ConfigurationSingleton.setBoldnessOnAllViews(root)
+        persistConfigModificationsOnAllViews(root)
         return root
     }
 

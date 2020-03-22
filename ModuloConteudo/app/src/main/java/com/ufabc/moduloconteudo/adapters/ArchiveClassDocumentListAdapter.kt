@@ -31,7 +31,7 @@ class ArchiveClassDocumentListAdapter : RecyclerView.Adapter<ArchiveClassDocumen
 
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): ArchiveClassDocumentListViewHolder {
         var arch_root = LayoutInflater.from(parent.context).inflate(R.layout.item_archive_class_document, parent, false)
-        ConfigurationSingleton.setBoldnessOnAllViews(arch_root)
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(arch_root)
         return ArchiveClassDocumentListViewHolder(arch_root)
     }
 
