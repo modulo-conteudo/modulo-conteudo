@@ -2,6 +2,7 @@ package com.ufabc.moduloconteudo.ui.configuration
 
 //import timber.log.Timber
 //import android.R
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +11,15 @@ import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import kotlinx.android.synthetic.main.fragment_configuration.view.*
 import com.ufabc.moduloconteudo.R
+import kotlinx.android.synthetic.main.fragment_configuration.view.*
+
+//import com.google.android.material.slider
+//import androidx.ui.material.slider
 
 //import android.widget.Toast.makeText as makeText1
 
-class ConfigurationFragment : Fragment() {
+class ConfigurationFragment : Fragment(){
 
     companion object {
         fun newInstance() = ConfigurationFragment()
@@ -32,14 +36,15 @@ class ConfigurationFragment : Fragment() {
         val view : View = inflater.inflate(R.layout.fragment_configuration, container, false)
 
         // This sets the default boldness of a view in onCreate time
-        ConfigurationSingleton.setBoldnessOnAllViews(view)
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(view)
 
 
-        ConfigurationSingleton.setSwitchPositioning(view.bold_switch)
+        ConfigurationSingleton.setSwitchPositioning(view)
 
         // Listener for bold text switch on runtime
         view.bold_switch.setOnCheckedChangeListener { btn, _ ->
-            ConfigurationSingleton.switchBoldnessOnAllViews(view, btn)
+            ConfigurationSingleton.changeBoldness(view, btn)
+            ConfigurationSingleton.changeConfigExample(view.example_text)
         }
 
         // Listener for high contrast text switch
@@ -50,8 +55,8 @@ class ConfigurationFragment : Fragment() {
 
         // Listener for big text switch
         view.big_text_switch.setOnCheckedChangeListener { btn, isChecked ->
-            val message = if (isChecked) "Switch1:ON" else "Switch1:OFF"
-            makeText(activity, message, Toast.LENGTH_SHORT).show()
+            ConfigurationSingleton.bigText(view, isChecked)
+            ConfigurationSingleton.changeConfigExample(view.example_text)
         }
 
         return view

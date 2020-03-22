@@ -13,6 +13,7 @@ object AppPreferences {
     private val BOLD_STATUS = Pair("is_bold", false)
     private val HC_STATUS = Pair("is_high_contrast", false)
     private val FS_STATUS = Pair("font_size", 14)
+    private val RA_VALUE  = Pair("ra_value", "")
 
 
     fun init(context: Context) {
@@ -58,4 +59,12 @@ object AppPreferences {
         set(value) = preferences.edit {
             it.putInt(FS_STATUS.first, value)
         }
+
+    var MyRaValue: String?
+        get() = preferences.getString(RA_VALUE.first, RA_VALUE.second)
+
+        set(value) = preferences.edit {
+            it.putString(RA_VALUE.first, value)
+        }
+
 }
