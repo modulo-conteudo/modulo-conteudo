@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,6 +21,7 @@
             android:gravity="center"
             android:text="@string/example_text_value"
             android:textAlignment="center"
+            android:textColor="@color/colorDarkGrey"
             android:textSize="@dimen/body"
             tools:text="@string/example_text_value" />
 
@@ -45,26 +47,77 @@
                     android:id="@+id/bold_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
                     android:fontFamily="sans-serif"
                     android:text="@string/config_negrito"
+                    android:textColor="@color/colorDarkGrey"
                     android:textSize="@dimen/body" />
 
                 <Switch
                     android:id="@+id/high_contrast_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
                     android:text="@string/high_c_switch_value"
+                    android:textColor="@color/colorDarkGrey"
                     android:textSize="@dimen/body" />
 
-                <Switch
-                    android:id="@+id/big_text_switch"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/font_size_text_view"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/config_big_text_value"
+                    android:layout_marginRight="10dp"
+                    android:text="Tamanho da fonte"
+                    android:textColor="@color/colorDarkGrey"
                     android:textSize="@dimen/body" />
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/select_font_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-<!--                <com.google.android.material.slider.Slider-->
+                    <TextView
+                        android:id="@+id/lower_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="7dp"
+                        android:layout_marginStart="10dp"
+                        android:text="A"
+                        android:textColor="@color/colorDarkGrey"
+                        android:textSize="11sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar"
+                        style="@style/Widget.AppCompat.SeekBar.Discrete"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="28dp"
+                        android:layout_marginEnd="28dp"
+                        android:max="3"
+                        android:progress="1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/big_a"
+                        app:layout_constraintStart_toEndOf="@+id/lower_a"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/big_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="7dp"
+                        android:layout_marginEnd="14dp"
+                        android:textColor="@color/colorDarkGrey"
+                        android:text="A"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--                <com.google.android.material.slider.Slider-->
 <!--                    android:id="@+id/slider_1"-->
 <!--                    android:layout_width="0dp"-->
 <!--                    android:layout_height="wrap_content"-->

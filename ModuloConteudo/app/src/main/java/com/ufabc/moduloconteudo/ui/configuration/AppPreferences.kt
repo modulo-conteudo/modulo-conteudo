@@ -12,7 +12,7 @@ object AppPreferences {
     private val FIRST_RUN = Pair("is_first_run", true)
     private val BOLD_STATUS = Pair("is_bold", false)
     private val HC_STATUS = Pair("is_high_contrast", false)
-    private val FS_STATUS = Pair("font_size", 14)
+    private val FS_STATUS = Pair("font_size_", 1)
     private val RA_VALUE  = Pair("ra_value", "")
 
 
