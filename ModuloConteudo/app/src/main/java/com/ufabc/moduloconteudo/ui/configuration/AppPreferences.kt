@@ -14,6 +14,7 @@ object AppPreferences {
     private val HC_STATUS = Pair("is_high_contrast", false)
     private val FS_STATUS = Pair("font_size_", 1)
     private val RA_VALUE  = Pair("ra_value", "")
+    private val VIBRATE_STATUS = Pair("is_vibrate_enable", false)
 
 
     fun init(context: Context) {
@@ -67,4 +68,10 @@ object AppPreferences {
             it.putString(RA_VALUE.first, value)
         }
 
+    var MyVibrateOption: Boolean
+        get() = preferences.getBoolean(VIBRATE_STATUS.first, VIBRATE_STATUS.second)
+
+        set(value) = preferences.edit {
+            it.putBoolean(VIBRATE_STATUS.first, value)
+        }
 }

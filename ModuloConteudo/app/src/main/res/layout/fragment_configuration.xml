@@ -5,25 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:textStyle="bold"
+    android:forceDarkAllowed="true"
     tools:context=".ui.configuration.ConfigurationFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/example_text"
-            android:layout_width="match_parent"
-            android:layout_height="80sp"
+            android:id="@+id/textView"
+            android:layout_margin="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Texto de exemplo:"
             android:layout_marginBottom="8dp"
             android:background="#00FFFFFF"
-            android:gravity="center"
-            android:text="@string/example_text_value"
-            android:textAlignment="center"
             android:textColor="@color/colorDarkGrey"
             android:textSize="@dimen/body"
-            tools:text="@string/example_text_value" />
+            />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="120sp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/example_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#00FFFFFF"
+                    android:gravity="center"
+                    android:text="@string/example_text_value"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="@dimen/body"
+                    tools:text="@string/example_text_value" />
+            </LinearLayout>
+        </ScrollView>
 
         <View
             android:id="@+id/divider"
@@ -59,6 +85,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="14dp"
                     android:text="@string/high_c_switch_value"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="@dimen/body" />
+
+                <Switch
+                    android:id="@+id/vibrate_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/vbr_in_touch"
                     android:textColor="@color/colorDarkGrey"
                     android:textSize="@dimen/body" />
 

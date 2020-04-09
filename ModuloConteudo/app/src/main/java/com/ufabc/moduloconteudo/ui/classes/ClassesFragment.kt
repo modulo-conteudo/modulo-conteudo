@@ -57,7 +57,7 @@ class ClassesFragment : Fragment() {
         setObservers()
 
         ConfigurationSingleton.init(context)
-        persistConfigModificationsOnAllViews(root)
+        persistConfigModificationsOnAllViews(root, context)
         return root
     }
 
@@ -109,10 +109,12 @@ class ClassesFragment : Fragment() {
     private fun updateClassesList() {
         // TODO: Gambiarra?
         currentDay.value = currentDay.value
+
     }
 
     private fun updateTextCurrentDay(day : Int) {
         home_txtCurrentDay.text = daysOfWeek[day]
+        context?.let { ConfigurationSingleton.VibrateCellphone(it) }
     }
 
     private fun setCurrWeek(weekType: Int) {

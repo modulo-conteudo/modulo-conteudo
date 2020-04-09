@@ -30,7 +30,7 @@ class ArchiveClassNumberListAdapter : RecyclerView.Adapter<ArchiveClassNumberLis
 
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): ArchiveClassNumberListViewHolder {
         val arch_list_root = LayoutInflater.from(parent.context).inflate(R.layout.item_archive_class_number, parent, false)
-        ConfigurationSingleton.persistConfigModificationsOnAllViews(arch_list_root)
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(arch_list_root, null)
         return ArchiveClassNumberListViewHolder(arch_list_root)
     }
 

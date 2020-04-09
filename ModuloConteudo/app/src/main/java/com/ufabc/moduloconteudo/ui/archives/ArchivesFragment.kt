@@ -78,7 +78,7 @@ class ArchivesFragment : Fragment() {
         setObservers(root)
         setButtonClickEvents(root)
         //deepLevel.value = 0
-        ConfigurationSingleton.persistConfigModificationsOnAllViews(root)
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(root, context)
         return root
     }
 
@@ -99,6 +99,7 @@ class ArchivesFragment : Fragment() {
     }
 
     private fun setObservers(root : View) {
+
         deepLevel.observe(this, Observer {
             if(it == 0) setupClassNamesAdapter(root)
             if(it == 1) setupClassNumbersAdapter(root)
@@ -106,11 +107,14 @@ class ArchivesFragment : Fragment() {
             updateHistory(it)
             updateBackButtonVisibility(it)
         })
+
     }
 
     private fun updateBackButtonVisibility(level: Int?) {
         if(level == 0) btnBack.visibility = View.INVISIBLE
-        else btnBack.visibility = View.VISIBLE
+        else {
+            btnBack.visibility = View.VISIBLE
+        }
     }
 
     private fun updateHistory(level: Int) {
@@ -119,13 +123,13 @@ class ArchivesFragment : Fragment() {
         if(level >= 1) txt += " $histClassName /"
         if(level >= 2) txt += " $histClassNumber /"
         txtHistory.text = txt
+        context?.let { ConfigurationSingleton.VibrateCellphone(it) }
     }
 
 
     private fun setupClassNamesAdapter(root : View) {
         recyclerArchives.adapter = classesNameListAdapter
         recyclerArchives.layoutManager = LinearLayoutManager(root.context)
-
         classesNameListAdapter.onItemClick = { className, position ->
             classNumbers = className.classNumbers
             histClassName = className.nome_turma
@@ -149,6 +153,7 @@ class ArchivesFragment : Fragment() {
     }
 
     private fun setupClassDocumentsAdapter(root: View) {
+
         recyclerArchives.adapter = classesDocumentListAdapter
         recyclerArchives.layoutManager = LinearLayoutManager(root.context)
 

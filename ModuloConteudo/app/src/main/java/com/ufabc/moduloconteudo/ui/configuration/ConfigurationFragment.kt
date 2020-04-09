@@ -3,6 +3,7 @@ package com.ufabc.moduloconteudo.ui.configuration
 //import timber.log.Timber
 //import android.R
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import android.widget.Toast.makeText
 import android.widget.SeekBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.ufabc.moduloconteudo.R
@@ -38,7 +42,7 @@ class ConfigurationFragment : Fragment(){
         val view : View = inflater.inflate(R.layout.fragment_configuration, container, false)
 
         // This sets the default boldness of a view in onCreate time
-        ConfigurationSingleton.persistConfigModificationsOnAllViews(view)
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(view, context)
 
 
         ConfigurationSingleton.setSwitchPositioning(view)
@@ -51,15 +55,20 @@ class ConfigurationFragment : Fragment(){
 
         // Listener for high contrast text switch
         view.high_contrast_switch.setOnCheckedChangeListener { btn, isChecked ->
-            val message = if (isChecked) "Switch1:ON" else "Switch1:OFF"
+
+//            val message = if (isChecked) "Switch1:ON" else "Switch1:OFF"
+            val message = "Alterar contraste"
             makeText(activity, message, Toast.LENGTH_SHORT).show()
+//            AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+//            AppCompatDelegate.MODE_NIGHT_YES
+
         }
 
-        // Listener for big text switch
-//        view.big_text_switch.setOnCheckedChangeListener { btn, isChecked ->
-//            ConfigurationSingleton.bigText(view, isChecked)
-//            ConfigurationSingleton.changeConfigExample(view.example_text)
-//        }
+        view.vibrate_switch.setOnCheckedChangeListener {btn, is_checked ->
+            ConfigurationSingleton.changeVibrateOpt(is_checked)
+
+        }
+
 
         view.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {

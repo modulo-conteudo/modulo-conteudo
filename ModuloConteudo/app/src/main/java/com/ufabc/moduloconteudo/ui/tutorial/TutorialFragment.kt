@@ -29,7 +29,7 @@ class TutorialFragment : Fragment() {
             textView.text = it
         })
 
-        ConfigurationSingleton.persistConfigModificationsOnAllViews(root)
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(root, context)
 
         return root
     }

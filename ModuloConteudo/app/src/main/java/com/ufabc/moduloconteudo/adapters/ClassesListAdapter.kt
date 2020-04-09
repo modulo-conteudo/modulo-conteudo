@@ -22,7 +22,7 @@ class ClassesListAdapter : RecyclerView.Adapter<ClassesListAdapter.ClassesListVi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassesListViewHolder {
         val card_root = LayoutInflater.from(parent.context).inflate(R.layout.card_aula, parent, false)
-        ConfigurationSingleton.persistConfigModificationsOnAllViews(card_root)
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(card_root, null)
         return ClassesListViewHolder(card_root)
 //        return card_root
     }
