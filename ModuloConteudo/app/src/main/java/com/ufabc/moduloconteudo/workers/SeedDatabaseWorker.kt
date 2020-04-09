@@ -52,7 +52,7 @@ class SeedDatabaseWorker (
 
                     val aula = object : TypeToken<List<Aula>>(){}.type
                     val aulaList : List<Aula> = Gson().fromJson(jsonReader, aula)
-                    database.aulaDao().insertAll(aulaList)
+                    database.aulaDao().insertAulaList(aulaList)
                 }
             }
 
