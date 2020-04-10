@@ -40,6 +40,12 @@
     <string name="horario_fim">Horário de término</string>
     <string name="as">às</string>
     <string name="is_empty_error">Campo não pode estar vazio.</string>
+    <string name="example_text">example_text</string>
+    <string name="example_text_value">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</string>
+    <string name="config_negrito">Negrito</string>
+    <string name="high_c_switch_value">Alto contraste</string>
+    <string name="config_big_text_value">Texto grande</string>
+    <string name="vbr_in_touch">Vibrar ao tocar</string>
     <string-array name="week_days">
         <item>@string/sunday</item>
         <item>@string/monday</item>
