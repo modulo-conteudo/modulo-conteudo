@@ -12,5 +12,8 @@ interface AulaDao {
    fun getAulasUsingRA(ra : String) : LiveData<List<AulasDiscente>>
 
    @Insert(onConflict = OnConflictStrategy.REPLACE)
-   suspend fun insertAll(aulas: List<Aula>)
+   suspend fun insertAulaList(aulas: List<Aula>)
+
+   @Insert(onConflict = OnConflictStrategy.REPLACE)
+   suspend fun insertAula(aula : Aula)
 }

@@ -4,11 +4,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import androidx.activity.viewModels
@@ -52,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
         studentRa.observe(this, Observer {
             if(it.isEmpty()) {
                 Snackbar.make(findViewById(R.id.login_layout), getString(R.string.error_ra_not_found), Snackbar.LENGTH_LONG)
-                    .setAction(R.string.btn_ok, null)
+                    .setAction(R.string.ok, null)
                     .show()
             } else {
                 openHomeActivity()
@@ -84,7 +79,5 @@ class LoginActivity : AppCompatActivity() {
         intent.putExtra(RA_EXTRA, studentRa.value)
         startActivity(intent, null)
     }
-
-
 
 }

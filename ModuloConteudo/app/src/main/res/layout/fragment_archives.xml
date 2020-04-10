@@ -6,15 +6,15 @@
 
     <ImageButton
         android:id="@+id/archives_btn_back"
-        android:src="@drawable/ic_arrow_back_black_24dp"
-        android:background="@android:color/transparent"
-        android:layout_margin="8dp"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_margin="8dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Botão voltar para lista anterior"
+        android:src="@drawable/ic_arrow_back_black_24dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/archives_txt_history"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/archives_txt_history"
