@@ -48,6 +48,7 @@
     <string name="vbr_in_touch">Vibrar ao tocar</string>
     <string name="inv_ra_btn_value">Entrar com outro RA</string>
     <string name="fab_btn_visibility">Visibilidade botão libras</string>
+    <string name="title_add_class">Adicionar disciplina</string>
     <string-array name="week_days">
         <item>@string/sunday</item>
         <item>@string/monday</item>
