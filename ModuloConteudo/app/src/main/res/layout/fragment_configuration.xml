@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:textStyle="bold"
-    android:forceDarkAllowed="true"
     tools:context=".ui.configuration.ConfigurationFragment">
 
     <LinearLayout
@@ -74,7 +73,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="14dp"
-                    android:fontFamily="sans-serif"
                     android:text="@string/config_negrito"
                     android:textColor="@color/colorDarkGrey"
                     android:textSize="@dimen/body" />
@@ -93,8 +91,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="14dp"
-                    android:fontFamily="sans-serif"
                     android:text="@string/vbr_in_touch"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="@dimen/body" />
+
+                <Switch
+                    android:id="@+id/fab_btn_visibility"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:text="@string/fab_btn_visibility"
                     android:textColor="@color/colorDarkGrey"
                     android:textSize="@dimen/body" />
 
@@ -158,19 +164,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/inv_ra_btn_value" />
-
-                <!--                <com.google.android.material.slider.Slider-->
-<!--                    android:id="@+id/slider_1"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="@14sp"-->
-<!--                    android:layout_marginLeft="@14sp "-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:stepSize="1"-->
-<!--                    android:theme="@style/ThemeOverlay.PrimaryPalette.Red"-->
-<!--                    android:valueFrom="0"-->
-<!--                    android:valueTo="11"/>-->
-
 
             </LinearLayout>
         </ScrollView>

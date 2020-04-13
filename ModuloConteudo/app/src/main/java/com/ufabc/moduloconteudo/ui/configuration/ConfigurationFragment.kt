@@ -47,13 +47,8 @@ class ConfigurationFragment : Fragment(){
 
         // Listener for high contrast text switch
         view.high_contrast_switch.setOnCheckedChangeListener { btn, isChecked ->
-
-//            val message = if (isChecked) "Switch1:ON" else "Switch1:OFF"
             val message = "Alterar contraste"
             makeText(activity, message, Toast.LENGTH_SHORT).show()
-//            AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
-//            AppCompatDelegate.MODE_NIGHT_YES
-
         }
 
         view.vibrate_switch.setOnCheckedChangeListener {btn, is_checked ->
@@ -64,6 +59,10 @@ class ConfigurationFragment : Fragment(){
         view.invalidate_ra_btn.setOnClickListener { _ ->
             ConfigurationSingleton.setRA("")
             startActivity(Intent(context, LoginActivity::class.java), null)
+        }
+
+        view.fab_btn_visibility.setOnCheckedChangeListener { btn, is_checked ->
+            ConfigurationSingleton.changeFabVisibility(is_checked)
         }
 
 

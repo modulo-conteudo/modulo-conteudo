@@ -29,12 +29,10 @@ object ConfigurationSingleton {
 
     private val font_text = arrayOf("Pequena", "Padrão", "Grande", "Maior")
     private var seekBar_positioning = 1
-    private var isBigFont:Boolean = false
     private var is_vibrate_enable:Boolean = false
-    private lateinit var btn_ref: CompoundButton
 
     private var fontSize by Delegates.notNull<Int>()
-//    private lateinit var preferences: Unit
+    lateinit private var fab_libras : View
 
     fun init(context: Context?) {
         if (context != null) {
@@ -48,6 +46,7 @@ object ConfigurationSingleton {
             AppPreferences.MyHighContrastStatus = isHighContrast
             AppPreferences.MyVibrateOption = is_vibrate_enable
             AppPreferences.MyRaValue = ""
+            AppPreferences.MyFabVisibility = false
         } else {
             isBold = AppPreferences.MyBoldStatus
             seekBar_positioning = AppPreferences.MyFontSizeStatus
@@ -61,8 +60,14 @@ object ConfigurationSingleton {
         AppPreferences.MyRaValue = ra
     }
 
-    fun getRA(): String? {
-        return AppPreferences.MyRaValue
+    fun getRA(): String? = AppPreferences.MyRaValue
+
+
+
+    fun setFabLibrasVisibility(fab: View) {
+        fab_libras = fab
+        if (!AppPreferences.MyFabVisibility)
+            fab.visibility = View.GONE
     }
 
     fun setBoldnessOnAllViews(view: View) {
@@ -82,6 +87,15 @@ object ConfigurationSingleton {
         AppPreferences.MyBoldStatus = isBold
     }
 
+    fun changeFabVisibility(isChecked: Boolean) {
+        AppPreferences.MyFabVisibility = isChecked
+
+        if (isChecked)
+            fab_libras.visibility = View.VISIBLE
+        else
+            fab_libras.visibility = View.GONE
+    }
+
     fun changeConfigExample(txt:TextView) {
         if (this.isBold) {
             txt.typeface = Typeface.DEFAULT_BOLD
@@ -94,9 +108,6 @@ object ConfigurationSingleton {
 
 
     fun persistConfigModificationsOnAllViews(view: View, c: Context?) {
-//        startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS),0)
-//        myStartActivityForResult<Activity>(1)
-
         if (c != null) VibrateCellphone(c)
 
         for (v in view.getAllViews()) {
@@ -116,8 +127,6 @@ object ConfigurationSingleton {
     fun VibrateCellphone(c : Context) {
         if (!is_vibrate_enable) return
         val v = c.getSystemService(VIBRATOR_SERVICE) as Vibrator?
-            // Vibrate for 500 milliseconds
-            // Vibrate for 500 milliseconds
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             v!!.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
         } else {
@@ -139,10 +148,8 @@ object ConfigurationSingleton {
         view.font_size_text_view.text = "Tamanho da fonte: ${font_text[seekBar_positioning]}"
         view.bold_switch.isChecked = this.isBold
         view.vibrate_switch.isChecked = is_vibrate_enable
-        this.btn_ref = view.bold_switch
+        view.fab_btn_visibility.isChecked = AppPreferences.MyFabVisibility
         view.seekBar.progress = this.seekBar_positioning
-
-
     }
 
     // Torcer pra essa porcaria não ir ao infinito e além
@@ -158,4 +165,6 @@ object ConfigurationSingleton {
         is_vibrate_enable = isChecked
         AppPreferences.MyVibrateOption = is_vibrate_enable
     }
+
+
 }

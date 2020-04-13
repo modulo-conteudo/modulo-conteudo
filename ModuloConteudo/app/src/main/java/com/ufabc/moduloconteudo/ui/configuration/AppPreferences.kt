@@ -12,6 +12,7 @@ object AppPreferences {
     private val FIRST_RUN = Pair("is_first_run", true)
     private val BOLD_STATUS = Pair("is_bold", false)
     private val HC_STATUS = Pair("is_high_contrast", false)
+    private val FAB_LIBRAS_STATUS = Pair("is_fab_libras_visible", false)
     private val FS_STATUS = Pair("font_size_", 1)
     private val RA_VALUE  = Pair("ra_value", "")
     private val VIBRATE_STATUS = Pair("is_vibrate_enable", false)
@@ -30,6 +31,7 @@ object AppPreferences {
         operation(editor)
         editor.apply()
     }
+
     var isFirstRun: Boolean
         // custom getter to get a preference of a desired type, with a predefined default value
         get() = preferences.getBoolean(FIRST_RUN.first, FIRST_RUN.second)
@@ -73,5 +75,12 @@ object AppPreferences {
 
         set(value) = preferences.edit {
             it.putBoolean(VIBRATE_STATUS.first, value)
+        }
+
+    var MyFabVisibility: Boolean
+        get() = preferences.getBoolean(FAB_LIBRAS_STATUS.first, FAB_LIBRAS_STATUS.second)
+
+        set(value) = preferences.edit {
+            it.putBoolean(FAB_LIBRAS_STATUS.first, value)
         }
 }
