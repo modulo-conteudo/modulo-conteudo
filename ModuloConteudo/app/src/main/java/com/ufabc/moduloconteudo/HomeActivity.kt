@@ -9,19 +9,22 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
 
 class HomeActivity : AppCompatActivity() {
-     // Modificação qualquer só para testar se as funcionalidades do AS com o git estão funcionando direito
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val fab : View = findViewById(R.id.fab_libras)
+        ConfigurationSingleton.setFabLibrasVisibility(fab)
+
         fab.setOnClickListener { view ->
-            Toast.makeText(this, "Abrir video com tradução em Libras", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Abrir video com tradução em Libras", Toast.LENGTH_SHORT)
+                .show()
         }
+
 
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each

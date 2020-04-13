@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.data.ClassNumber
+import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
 import kotlinx.android.synthetic.main.item_archive_class_number.view.*
 
 class ArchiveClassNumberListAdapter : RecyclerView.Adapter<ArchiveClassNumberListAdapter.ArchiveClassNumberListViewHolder> (){
@@ -28,7 +29,9 @@ class ArchiveClassNumberListAdapter : RecyclerView.Adapter<ArchiveClassNumberLis
     }
 
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): ArchiveClassNumberListViewHolder {
-        return ArchiveClassNumberListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_archive_class_number, parent, false))
+        val arch_list_root = LayoutInflater.from(parent.context).inflate(R.layout.item_archive_class_number, parent, false)
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(arch_list_root, null)
+        return ArchiveClassNumberListViewHolder(arch_list_root)
     }
 
     override fun getItemCount(): Int {

@@ -13,5 +13,8 @@ interface DiscenteTurmaDao {
     fun getTurmasWithRa(ra : String) : LiveData<List<DiscenteTurma>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSingle(discenteTurmas: DiscenteTurma)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(discenteTurmas: List<DiscenteTurma>)
 }

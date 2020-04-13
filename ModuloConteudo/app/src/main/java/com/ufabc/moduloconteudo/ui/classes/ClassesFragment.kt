@@ -1,23 +1,26 @@
 package com.ufabc.moduloconteudo.ui.classes
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.ufabc.moduloconteudo.AddClassActivity
 import com.ufabc.moduloconteudo.utilities.InjectorUtils
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.adapters.ClassesListAdapter
 import com.ufabc.moduloconteudo.data.aula.Aula
-import com.ufabc.moduloconteudo.ui.configuration.BoldConfigurationSingleton
+import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
+import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton.persistConfigModificationsOnAllViews
 import com.ufabc.moduloconteudo.utilities.AppUtils
 import com.ufabc.moduloconteudo.utilities.RA_EXTRA
 import kotlinx.android.synthetic.main.fragment_classes.*
@@ -36,6 +39,7 @@ class ClassesFragment : Fragment() {
     lateinit var rbWeek1 : RadioButton
     lateinit var rbWeek2: RadioButton
     lateinit var pbClassList : ProgressBar
+    lateinit var fabAddClass : FloatingActionButton
 
     // Variables
     val classesListAdapter : ClassesListAdapter = ClassesListAdapter()
@@ -50,13 +54,14 @@ class ClassesFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_classes, container, false)
 
         studentRa = activity?.intent?.getStringExtra(RA_EXTRA) ?: ""
-        daysOfWeek = resources.getStringArray(R.array.days_week)
+        daysOfWeek = resources.getStringArray(R.array.week_days)
 
         bindComponents(root)
         setupClassesAdapter(root)
         setClickEvents()
         setObservers()
-        BoldConfigurationSingleton.setBoldnessOnAllViews(root)
+
+        persistConfigModificationsOnAllViews(root, context)
         return root
     }
 
@@ -97,6 +102,8 @@ class ClassesFragment : Fragment() {
         pbClassList = root.findViewById(R.id.home_pbClassList)
 
         recyclerClasses = root.findViewById(R.id.home_recyclerClasses)
+
+        fabAddClass = root.findViewById(R.id.fab_addClass)
     }
 
     private fun setupClassesAdapter(root : View) {
@@ -108,10 +115,12 @@ class ClassesFragment : Fragment() {
     private fun updateClassesList() {
         // TODO: Gambiarra?
         currentDay.value = currentDay.value
+
     }
 
     private fun updateTextCurrentDay(day : Int) {
         home_txtCurrentDay.text = daysOfWeek[day]
+        context?.let { ConfigurationSingleton.VibrateCellphone(it) }
     }
 
     private fun setCurrWeek(weekType: Int) {
@@ -140,6 +149,12 @@ class ClassesFragment : Fragment() {
             if(checkedId == rbWeek1.id) currentWeek = 1
             if(checkedId == rbWeek2.id) currentWeek = 2
             updateClassesList()
+        }
+
+        fabAddClass.setOnClickListener {
+            val intent = Intent(activity, AddClassActivity::class.java)
+            intent.putExtra(RA_EXTRA, studentRa)
+            startActivity(intent, null)
         }
     }
 

@@ -4,18 +4,21 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Window
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import com.ufabc.moduloconteudo.App.Companion.context
+import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
 import com.ufabc.moduloconteudo.utilities.InjectorUtils
 import com.ufabc.moduloconteudo.utilities.RA_EXTRA
+import kotlinx.android.synthetic.main.activity_home.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -30,24 +33,45 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        supportActionBar?.hide()
+        ConfigurationSingleton.init(context)
 
-        bindComponents()
-        setClickEvents()
-        setObservers()
+        if (ConfigurationSingleton.getRA() != "") {
+            studentRa.value = ConfigurationSingleton.getRA()
+            openHomeActivity()
+
+        } else {
+            setContentView(R.layout.activity_login)
+
+            ConfigurationSingleton.persistConfigModificationsOnAllViews(
+                getWindow().getDecorView().getRootView(), null
+            )
+
+            supportActionBar?.hide()
+            bindComponents()
+            setClickEvents()
+            setObservers()
+        }
+
     }
+
+
 
     private fun setObservers() {
         studentRa.observe(this, Observer {
-            if(it.isEmpty()) {
-                Snackbar.make(findViewById(R.id.login_layout), getString(R.string.error_ra_not_found), Snackbar.LENGTH_LONG)
-                    .setAction(R.string.btn_ok, null)
+            if (it.isEmpty()) {
+                Snackbar.make(
+                    findViewById(R.id.login_layout),
+                    getString(R.string.error_ra_not_found),
+                    Snackbar.LENGTH_LONG
+                )
+                    .setAction(R.string.ok, null)
                     .show()
             } else {
+                ConfigurationSingleton.setRA(it)
                 openHomeActivity()
             }
         })
+
 
         loginViewModel.student.observe(this, Observer {
             if(it != null) studentRa.value = it.ra
@@ -74,7 +98,5 @@ class LoginActivity : AppCompatActivity() {
         intent.putExtra(RA_EXTRA, studentRa.value)
         startActivity(intent, null)
     }
-
-
 
 }

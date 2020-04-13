@@ -2,9 +2,7 @@ package com.ufabc.moduloconteudo.ui.archives
 
 import android.content.Intent
 import android.net.Uri
-import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +22,7 @@ import com.ufabc.moduloconteudo.adapters.ArchiveClassNumberListAdapter
 import com.ufabc.moduloconteudo.data.ClassDocument
 import com.ufabc.moduloconteudo.data.ClassName
 import com.ufabc.moduloconteudo.data.ClassNumber
+import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
 
 class ArchivesFragment : Fragment() {
 
@@ -79,7 +78,7 @@ class ArchivesFragment : Fragment() {
         setObservers(root)
         setButtonClickEvents(root)
         //deepLevel.value = 0
-
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(root, context)
         return root
     }
 
@@ -87,6 +86,7 @@ class ArchivesFragment : Fragment() {
         recyclerArchives = root.findViewById(R.id.archives_recycler_archives)
         btnBack = root.findViewById(R.id.archives_btn_back)
         txtHistory = root.findViewById(R.id.archives_txt_history)
+
     }
 
     private fun setButtonClickEvents(root: View) {
@@ -95,9 +95,11 @@ class ArchivesFragment : Fragment() {
                 deepLevel.value = deepLevel.value!! - 1
             }
         }
+        ConfigurationSingleton.setBoldnessOnAllViews(root)
     }
 
     private fun setObservers(root : View) {
+
         deepLevel.observe(this, Observer {
             if(it == 0) setupClassNamesAdapter(root)
             if(it == 1) setupClassNumbersAdapter(root)
@@ -105,11 +107,14 @@ class ArchivesFragment : Fragment() {
             updateHistory(it)
             updateBackButtonVisibility(it)
         })
+
     }
 
     private fun updateBackButtonVisibility(level: Int?) {
         if(level == 0) btnBack.visibility = View.INVISIBLE
-        else btnBack.visibility = View.VISIBLE
+        else {
+            btnBack.visibility = View.VISIBLE
+        }
     }
 
     private fun updateHistory(level: Int) {
@@ -118,13 +123,13 @@ class ArchivesFragment : Fragment() {
         if(level >= 1) txt += " $histClassName /"
         if(level >= 2) txt += " $histClassNumber /"
         txtHistory.text = txt
+        context?.let { ConfigurationSingleton.VibrateCellphone(it) }
     }
 
 
     private fun setupClassNamesAdapter(root : View) {
         recyclerArchives.adapter = classesNameListAdapter
         recyclerArchives.layoutManager = LinearLayoutManager(root.context)
-
         classesNameListAdapter.onItemClick = { className, position ->
             classNumbers = className.classNumbers
             histClassName = className.nome_turma
@@ -148,6 +153,7 @@ class ArchivesFragment : Fragment() {
     }
 
     private fun setupClassDocumentsAdapter(root: View) {
+
         recyclerArchives.adapter = classesDocumentListAdapter
         recyclerArchives.layoutManager = LinearLayoutManager(root.context)
 

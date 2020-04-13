@@ -1,24 +1,22 @@
 package com.ufabc.moduloconteudo.ui.configuration
 
-//import timber.log.Timber
-//import android.R
-import android.content.Context
-import android.graphics.Typeface
+
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import android.widget.Toast
 import android.widget.Toast.makeText
-import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import kotlinx.android.synthetic.main.fragment_configuration.view.*
+import com.ufabc.moduloconteudo.LoginActivity
 import com.ufabc.moduloconteudo.R
+import kotlinx.android.synthetic.main.fragment_configuration.view.*
 
-//import android.widget.Toast.makeText as makeText1
 
-class ConfigurationFragment : Fragment() {
+class ConfigurationFragment : Fragment(){
 
     companion object {
         fun newInstance() = ConfigurationFragment()
@@ -33,26 +31,58 @@ class ConfigurationFragment : Fragment() {
 
 
         val view : View = inflater.inflate(R.layout.fragment_configuration, container, false)
+
+
         // This sets the default boldness of a view in onCreate time
-        BoldConfigurationSingleton.setBoldnessOnAllViews(view)
-        BoldConfigurationSingleton.setSwitchPositioning(view.bold_switch)
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(view, context)
+
+
+        ConfigurationSingleton.setSwitchPositioning(view)
 
         // Listener for bold text switch on runtime
         view.bold_switch.setOnCheckedChangeListener { btn, _ ->
-            BoldConfigurationSingleton.switchBoldnessOnAllViews(view, btn)
+            ConfigurationSingleton.changeBoldness(view, btn)
+            ConfigurationSingleton.changeConfigExample(view.example_text)
         }
 
         // Listener for high contrast text switch
         view.high_contrast_switch.setOnCheckedChangeListener { btn, isChecked ->
-            val message = if (isChecked) "Switch1:ON" else "Switch1:OFF"
+            val message = "Alterar contraste"
             makeText(activity, message, Toast.LENGTH_SHORT).show()
         }
 
-        // Listener for big text switch
-        view.big_text_switch.setOnCheckedChangeListener { btn, isChecked ->
-            val message = if (isChecked) "Switch1:ON" else "Switch1:OFF"
-            makeText(activity, message, Toast.LENGTH_SHORT).show()
+        view.vibrate_switch.setOnCheckedChangeListener {btn, is_checked ->
+            ConfigurationSingleton.changeVibrateOpt(is_checked)
+
         }
+
+        view.invalidate_ra_btn.setOnClickListener { _ ->
+            ConfigurationSingleton.setRA("")
+            startActivity(Intent(context, LoginActivity::class.java), null)
+        }
+
+        view.fab_btn_visibility.setOnCheckedChangeListener { btn, is_checked ->
+            ConfigurationSingleton.changeFabVisibility(is_checked)
+        }
+
+
+        view.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
+                ConfigurationSingleton.bigText(view, i)
+                ConfigurationSingleton.changeConfigExample(view.example_text)
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+//                makeText(activity, "", Toast.LENGTH_SHORT).show()
+
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+//                makeText(activity, "", Toast.LENGTH_SHORT).show()
+
+            }
+        })
+
 
         return view
     }
@@ -64,7 +94,5 @@ class ConfigurationFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel::class.java)
 
         // TODO: Use ViewModel
-
-
     }
 }

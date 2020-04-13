@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.data.aula.Aula
+import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
 import kotlinx.android.synthetic.main.card_aula.view.*
 
 class ClassesListAdapter : RecyclerView.Adapter<ClassesListAdapter.ClassesListViewHolder>() {
@@ -20,7 +21,10 @@ class ClassesListAdapter : RecyclerView.Adapter<ClassesListAdapter.ClassesListVi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassesListViewHolder {
-        return ClassesListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.card_aula, parent, false))
+        val card_root = LayoutInflater.from(parent.context).inflate(R.layout.card_aula, parent, false)
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(card_root, null)
+        return ClassesListViewHolder(card_root)
+//        return card_root
     }
 
     override fun getItemCount(): Int {

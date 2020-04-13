@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,19 +10,45 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/example_text"
-            android:layout_width="match_parent"
-            android:layout_height="80sp"
+            android:id="@+id/textView"
+            android:layout_margin="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Texto de exemplo:"
             android:layout_marginBottom="8dp"
             android:background="#00FFFFFF"
-            android:gravity="center"
-            android:text="@string/example_text_value"
-            android:textAlignment="center"
+            android:textColor="@color/colorDarkGrey"
             android:textSize="@dimen/body"
-            tools:text="@string/example_text_value" />
+            />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="120sp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/example_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#00FFFFFF"
+                    android:gravity="center"
+                    android:text="@string/example_text_value"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="@dimen/body"
+                    tools:text="@string/example_text_value" />
+            </LinearLayout>
+        </ScrollView>
 
         <View
             android:id="@+id/divider"
@@ -45,24 +72,98 @@
                     android:id="@+id/bold_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
+                    android:layout_marginBottom="14dp"
                     android:text="@string/config_negrito"
+                    android:textColor="@color/colorDarkGrey"
                     android:textSize="@dimen/body" />
 
                 <Switch
                     android:id="@+id/high_contrast_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
                     android:text="@string/high_c_switch_value"
+                    android:textColor="@color/colorDarkGrey"
                     android:textSize="@dimen/body" />
 
                 <Switch
-                    android:id="@+id/big_text_switch"
+                    android:id="@+id/vibrate_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/config_big_text_value"
+                    android:layout_marginBottom="14dp"
+                    android:text="@string/vbr_in_touch"
+                    android:textColor="@color/colorDarkGrey"
                     android:textSize="@dimen/body" />
 
+                <Switch
+                    android:id="@+id/fab_btn_visibility"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:text="@string/fab_btn_visibility"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="@dimen/body" />
+
+                <TextView
+                    android:id="@+id/font_size_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="Tamanho da fonte"
+                    android:textColor="@color/colorDarkGrey"
+                    android:textSize="@dimen/body" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/select_font_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/lower_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="7dp"
+                        android:layout_marginStart="10dp"
+                        android:text="A"
+                        android:textColor="@color/colorDarkGrey"
+                        android:textSize="11sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar"
+                        style="@style/Widget.AppCompat.SeekBar.Discrete"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="28dp"
+                        android:layout_marginEnd="28dp"
+                        android:max="3"
+                        android:progress="1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/big_a"
+                        app:layout_constraintStart_toEndOf="@+id/lower_a"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/big_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="7dp"
+                        android:layout_marginEnd="14dp"
+                        android:textColor="@color/colorDarkGrey"
+                        android:text="A"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Button
+                    android:id="@+id/invalidate_ra_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/inv_ra_btn_value" />
 
             </LinearLayout>
         </ScrollView>
