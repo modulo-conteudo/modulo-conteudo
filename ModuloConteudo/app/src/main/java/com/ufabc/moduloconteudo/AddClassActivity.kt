@@ -10,6 +10,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.ufabc.moduloconteudo.data.AppDatabase
 import com.ufabc.moduloconteudo.data.aula.Aula
 import com.ufabc.moduloconteudo.data.discente_turma.DiscenteTurma
+import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton.persistConfigModificationsOnAllViews
 import com.ufabc.moduloconteudo.utilities.RA_EXTRA
 import kotlinx.coroutines.runBlocking
 
@@ -144,6 +145,10 @@ class AddClassActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_class)
+
+        persistConfigModificationsOnAllViews(getWindow().getDecorView().getRootView(), null)
+
+
         studentRA = intent?.getStringExtra(RA_EXTRA).toString()
         bindComponents()
         setClickEvents()
