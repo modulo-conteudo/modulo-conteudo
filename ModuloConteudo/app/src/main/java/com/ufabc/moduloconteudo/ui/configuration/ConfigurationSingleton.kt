@@ -1,15 +1,20 @@
 package com.ufabc.moduloconteudo.ui.configuration
 
+import android.app.Activity
 import android.content.Context
 import android.content.Context.VIBRATOR_SERVICE
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.provider.Settings
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.TextView
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.children
 import kotlinx.android.synthetic.main.fragment_configuration.view.*
 import kotlin.properties.Delegates
@@ -42,6 +47,7 @@ object ConfigurationSingleton {
             AppPreferences.MyFontSizeStatus = seekBar_positioning
             AppPreferences.MyHighContrastStatus = isHighContrast
             AppPreferences.MyVibrateOption = is_vibrate_enable
+            AppPreferences.MyRaValue = ""
         } else {
             isBold = AppPreferences.MyBoldStatus
             seekBar_positioning = AppPreferences.MyFontSizeStatus
@@ -51,6 +57,13 @@ object ConfigurationSingleton {
         fontSize = normalSizeFont + ((seekBar_positioning-1) * 3)
     }
 
+    fun setRA(ra : String) {
+        AppPreferences.MyRaValue = ra
+    }
+
+    fun getRA(): String? {
+        return AppPreferences.MyRaValue
+    }
 
     fun setBoldnessOnAllViews(view: View) {
         for (v in view.getAllViews()) {
@@ -79,7 +92,11 @@ object ConfigurationSingleton {
     }
 
 
+
     fun persistConfigModificationsOnAllViews(view: View, c: Context?) {
+//        startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS),0)
+//        myStartActivityForResult<Activity>(1)
+
         if (c != null) VibrateCellphone(c)
 
         for (v in view.getAllViews()) {
@@ -94,6 +111,7 @@ object ConfigurationSingleton {
             }
         }
     }
+
 
     fun VibrateCellphone(c : Context) {
         if (!is_vibrate_enable) return

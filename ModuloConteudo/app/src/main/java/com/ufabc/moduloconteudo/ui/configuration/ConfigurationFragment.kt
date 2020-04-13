@@ -1,29 +1,20 @@
 package com.ufabc.moduloconteudo.ui.configuration
 
-//import timber.log.Timber
-//import android.R
 
-import android.graphics.Bitmap
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import android.widget.Toast
 import android.widget.Toast.makeText
-import android.widget.SeekBar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.ufabc.moduloconteudo.LoginActivity
 import com.ufabc.moduloconteudo.R
 import kotlinx.android.synthetic.main.fragment_configuration.view.*
 
-
-//import com.google.android.material.slider
-//import androidx.ui.material.slider
-
-//import android.widget.Toast.makeText as makeText1
 
 class ConfigurationFragment : Fragment(){
 
@@ -40,6 +31,7 @@ class ConfigurationFragment : Fragment(){
 
 
         val view : View = inflater.inflate(R.layout.fragment_configuration, container, false)
+
 
         // This sets the default boldness of a view in onCreate time
         ConfigurationSingleton.persistConfigModificationsOnAllViews(view, context)
@@ -67,6 +59,11 @@ class ConfigurationFragment : Fragment(){
         view.vibrate_switch.setOnCheckedChangeListener {btn, is_checked ->
             ConfigurationSingleton.changeVibrateOpt(is_checked)
 
+        }
+
+        view.invalidate_ra_btn.setOnClickListener { _ ->
+            ConfigurationSingleton.setRA("")
+            startActivity(Intent(context, LoginActivity::class.java), null)
         }
 
 

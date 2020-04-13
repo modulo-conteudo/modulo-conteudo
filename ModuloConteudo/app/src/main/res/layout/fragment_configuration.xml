@@ -153,6 +153,12 @@
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <Button
+                    android:id="@+id/invalidate_ra_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/inv_ra_btn_value" />
+
                 <!--                <com.google.android.material.slider.Slider-->
 <!--                    android:id="@+id/slider_1"-->
 <!--                    android:layout_width="0dp"-->
