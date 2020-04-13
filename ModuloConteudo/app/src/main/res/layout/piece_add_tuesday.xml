@@ -35,11 +35,13 @@
         android:orientation="horizontal"
         android:weightSum="2"
         android:gravity="center"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/add_tvTuesday">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/add_tilHourBeginTuesday"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
             android:layout_width="match_parent"
@@ -47,7 +49,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/add_edtBeginHourTuesday"
                 android:hint="@string/horario_inicio"
-                android:inputType="number|numberSigned"
+                android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -60,6 +62,7 @@
             android:layout_height="wrap_content"/>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/add_tilHourEndTuesday"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
             android:layout_width="match_parent"
@@ -67,7 +70,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/add_edtEndHourTuesday"
                 android:hint="@string/horario_fim"
-                android:inputType="number|numberSigned"
+                android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -105,6 +108,7 @@
         app:layout_constraintStart_toStartOf="parent" >
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/add_tilClassroomTuesdayQ1"
             android:hint="@string/classs"
             android:layout_weight="2"
             android:layout_width="wrap_content"
@@ -167,6 +171,7 @@
         app:layout_constraintStart_toStartOf="parent" >
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/add_tilClassroomTuesdayQ2"
             android:hint="@string/classs"
             android:layout_weight="2"
             android:layout_width="wrap_content"
