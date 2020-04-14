@@ -24,10 +24,10 @@ class TutorialFragment : Fragment() {
             ViewModelProviders.of(this).get(TutorialViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_tutorial, container, false)
 
-        val textView: TextView = root.findViewById(R.id.text_notifications)
-        tutorialViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+//        val textView: TextView = root.findViewById(R.id.text_notifications)
+//        tutorialViewModel.text.observe(this, Observer {
+//            textView.text = it
+//        })
 
         ConfigurationSingleton.persistConfigModificationsOnAllViews(root, context)
 

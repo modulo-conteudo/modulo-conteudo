@@ -51,7 +51,6 @@ class LoginActivity : AppCompatActivity() {
             setClickEvents()
             setObservers()
         }
-
     }
 
 
@@ -98,5 +97,4 @@ class LoginActivity : AppCompatActivity() {
         intent.putExtra(RA_EXTRA, studentRa.value)
         startActivity(intent, null)
     }
-
 }
