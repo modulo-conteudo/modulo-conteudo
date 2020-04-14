@@ -1,4 +1,4 @@
-package com.ufabc.moduloconteudo.ui.archives
+package com.ufabc.moduloconteudo.act_home.tabs.archives
 
 import android.content.Intent
 import android.net.Uri
@@ -22,7 +22,7 @@ import com.ufabc.moduloconteudo.adapters.ArchiveClassNumberListAdapter
 import com.ufabc.moduloconteudo.data.ClassDocument
 import com.ufabc.moduloconteudo.data.ClassName
 import com.ufabc.moduloconteudo.data.ClassNumber
-import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
+import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton
 
 class ArchivesFragment : Fragment() {
 
@@ -45,7 +45,6 @@ class ArchivesFragment : Fragment() {
 
     init {
         // Just for tests
-
         classNames.add(ClassName("123123", "Algoritmos e estruturas de dados 1 A1 - diurno (Santo André)"))
         classNames.add(ClassName("123124", "Programação para dispositivos moveis B1 - diurno (Santo André)"))
         classNames.add(ClassName("123125", "Segurança de dados A2 - noturno (Santo André)"))
@@ -77,7 +76,6 @@ class ArchivesFragment : Fragment() {
         bindComponents(root)
         setObservers(root)
         setButtonClickEvents(root)
-        //deepLevel.value = 0
         ConfigurationSingleton.persistConfigModificationsOnAllViews(root, context)
         return root
     }
@@ -95,7 +93,6 @@ class ArchivesFragment : Fragment() {
                 deepLevel.value = deepLevel.value!! - 1
             }
         }
-        ConfigurationSingleton.setBoldnessOnAllViews(root)
     }
 
     private fun setObservers(root : View) {
@@ -111,10 +108,10 @@ class ArchivesFragment : Fragment() {
     }
 
     private fun updateBackButtonVisibility(level: Int?) {
-        if(level == 0) btnBack.visibility = View.INVISIBLE
-        else {
+        if(level == 0)
+            btnBack.visibility = View.INVISIBLE
+        else
             btnBack.visibility = View.VISIBLE
-        }
     }
 
     private fun updateHistory(level: Int) {

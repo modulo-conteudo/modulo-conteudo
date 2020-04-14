@@ -1,4 +1,4 @@
-package com.ufabc.moduloconteudo.ui.classes
+package com.ufabc.moduloconteudo.act_home.tabs.classes
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
@@ -14,15 +13,14 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.ufabc.moduloconteudo.AddClassActivity
+import com.ufabc.moduloconteudo.act_add_class.AddClassActivity
 import com.ufabc.moduloconteudo.utilities.InjectorUtils
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.adapters.ClassesListAdapter
 import com.ufabc.moduloconteudo.data.aula.Aula
-import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
-import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton.persistConfigModificationsOnAllViews
+import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton
+import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton.persistConfigModificationsOnAllViews
 import com.ufabc.moduloconteudo.utilities.AppUtils
-import com.ufabc.moduloconteudo.utilities.RA_EXTRA
 import kotlinx.android.synthetic.main.fragment_classes.*
 import java.util.*
 import kotlin.math.max
@@ -47,13 +45,16 @@ class ClassesFragment : Fragment() {
     var currentWeek : Int = 1
     val classes : MutableList<Aula> = mutableListOf()
     var studentRa : String = ""
-    val calendar = Calendar.getInstance()
     var daysOfWeek : Array<String> = arrayOf()
+
+    private val classesViewModel : ClassesViewModel by viewModels {
+        InjectorUtils.provideTurmaViewModelFactory(requireContext())
+    }
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
         val root = inflater.inflate(R.layout.fragment_classes, container, false)
 
-        studentRa = activity?.intent?.getStringExtra(RA_EXTRA) ?: ""
+        studentRa = ConfigurationSingleton.getRA().toString()
         daysOfWeek = resources.getStringArray(R.array.week_days)
 
         bindComponents(root)
@@ -72,7 +73,8 @@ class ClassesFragment : Fragment() {
         pbClassList.visibility = View.VISIBLE
         recyclerClasses.visibility = View.GONE
 
-        val day = calendar.get(Calendar.DAY_OF_MONTH)+7
+        val calendar = Calendar.getInstance()
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
         val month = calendar.get(Calendar.MONTH)
         val year = calendar.get(Calendar.YEAR)
         val weekType = AppUtils.biweekly(day, month, year)
@@ -83,11 +85,6 @@ class ClassesFragment : Fragment() {
         updateTextCurrentDay(currentDay.value!!)
         updateClassesList()
 
-    }
-
-    // ViewModel
-    private val classesViewModel : ClassesViewModel by viewModels {
-        InjectorUtils.provideTurmaViewModelFactory(requireContext())
     }
 
     private fun bindComponents(root: View) {
@@ -113,7 +110,6 @@ class ClassesFragment : Fragment() {
     }
 
     private fun updateClassesList() {
-        // TODO: Gambiarra?
         currentDay.value = currentDay.value
 
     }
@@ -132,6 +128,8 @@ class ClassesFragment : Fragment() {
 
     private fun setCurrentDay(day: Int) {
         currentDay.value = max(0, min(daysOfWeek.size-1, day))
+        currentDay.value = (day + daysOfWeek.size) % daysOfWeek.size
+
     }
 
     private fun setClickEvents() {
@@ -152,9 +150,7 @@ class ClassesFragment : Fragment() {
         }
 
         fabAddClass.setOnClickListener {
-            val intent = Intent(activity, AddClassActivity::class.java)
-            intent.putExtra(RA_EXTRA, studentRa)
-            startActivity(intent, null)
+            startAddClassActivity()
         }
     }
 
@@ -180,6 +176,11 @@ class ClassesFragment : Fragment() {
             currDayClasses.sortWith(compareBy( {it.horario_inicio}, {it.codigo_sie}))
             classesListAdapter.setData(currDayClasses)
         })
+    }
+
+    private fun startAddClassActivity() {
+        val intent = Intent(activity, AddClassActivity::class.java)
+        startActivity(intent, null)
     }
 }
 

@@ -1,4 +1,4 @@
-package com.ufabc.moduloconteudo.ui.configuration
+package com.ufabc.moduloconteudo.act_home.tabs.configuration
 
 
 import android.content.Intent
@@ -11,7 +11,7 @@ import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.ufabc.moduloconteudo.LoginActivity
+import com.ufabc.moduloconteudo.act_login.LoginActivity
 import com.ufabc.moduloconteudo.R
 import kotlinx.android.synthetic.main.fragment_configuration.view.*
 
@@ -58,7 +58,8 @@ class ConfigurationFragment : Fragment(){
 
         view.invalidate_ra_btn.setOnClickListener { _ ->
             ConfigurationSingleton.setRA("")
-            startActivity(Intent(context, LoginActivity::class.java), null)
+            startLoginActivity()
+
         }
 
         view.fab_btn_visibility.setOnCheckedChangeListener { btn, is_checked ->
@@ -83,11 +84,15 @@ class ConfigurationFragment : Fragment(){
             }
         })
 
-
         return view
     }
 
-
+    private fun startLoginActivity() {
+        val intent = Intent(context, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent, null)
+        activity?.finish()
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

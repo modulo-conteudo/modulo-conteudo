@@ -1,24 +1,23 @@
-package com.ufabc.moduloconteudo
+package com.ufabc.moduloconteudo.act_login
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import com.ufabc.moduloconteudo.App
 import com.ufabc.moduloconteudo.App.Companion.context
-import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
+import com.ufabc.moduloconteudo.R
+import com.ufabc.moduloconteudo.act_home.HomeActivity
+import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton
 import com.ufabc.moduloconteudo.utilities.InjectorUtils
-import com.ufabc.moduloconteudo.utilities.RA_EXTRA
-import kotlinx.android.synthetic.main.activity_home.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -34,26 +33,20 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ConfigurationSingleton.init(context)
-
         if (ConfigurationSingleton.getRA() != "") {
             studentRa.value = ConfigurationSingleton.getRA()
             openHomeActivity()
-
-        } else {
-            setContentView(R.layout.activity_login)
-
-            ConfigurationSingleton.persistConfigModificationsOnAllViews(
-                getWindow().getDecorView().getRootView(), null
-            )
-
-            supportActionBar?.hide()
-            bindComponents()
-            setClickEvents()
-            setObservers()
         }
+
+        setContentView(R.layout.activity_login)
+        supportActionBar?.hide()
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(window.decorView.rootView, null)
+        bindComponents()
+        setClickEvents()
+        setObservers()
+
+
     }
-
-
 
     private fun setObservers() {
         studentRa.observe(this, Observer {
@@ -62,9 +55,7 @@ class LoginActivity : AppCompatActivity() {
                     findViewById(R.id.login_layout),
                     getString(R.string.error_ra_not_found),
                     Snackbar.LENGTH_LONG
-                )
-                    .setAction(R.string.ok, null)
-                    .show()
+                ).setAction(R.string.ok, null).show()
             } else {
                 ConfigurationSingleton.setRA(it)
                 openHomeActivity()
@@ -94,7 +85,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun openHomeActivity() {
         val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra(RA_EXTRA, studentRa.value)
         startActivity(intent, null)
     }
 }

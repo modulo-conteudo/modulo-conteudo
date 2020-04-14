@@ -1,11 +1,8 @@
-package com.ufabc.moduloconteudo.ui.classes
+package com.ufabc.moduloconteudo.act_home.tabs.classes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ufabc.moduloconteudo.data.aula.AulaRepository
-import com.ufabc.moduloconteudo.data.discente.DiscenteRepository
-import com.ufabc.moduloconteudo.data.discente_turma.DiscenteTurmaRepository
-import com.ufabc.moduloconteudo.data.turma.TurmaRepository
 
 class ClassesViewModelFactory(
     private val repository : AulaRepository

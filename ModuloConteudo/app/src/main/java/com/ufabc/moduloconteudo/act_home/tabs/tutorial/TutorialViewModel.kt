@@ -1,4 +1,4 @@
-package com.ufabc.moduloconteudo.ui.tutorial
+package com.ufabc.moduloconteudo.act_home.tabs.tutorial
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

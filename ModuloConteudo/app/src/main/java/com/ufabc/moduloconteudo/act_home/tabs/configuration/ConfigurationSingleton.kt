@@ -1,21 +1,17 @@
-package com.ufabc.moduloconteudo.ui.configuration
+package com.ufabc.moduloconteudo.act_home.tabs.configuration
 
-import android.app.Activity
 import android.content.Context
 import android.content.Context.VIBRATOR_SERVICE
-import android.content.Intent
 import android.graphics.Typeface
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.provider.Settings
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.TextView
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.children
+import com.ufabc.moduloconteudo.R
 import kotlinx.android.synthetic.main.fragment_configuration.view.*
 import kotlin.properties.Delegates
 
@@ -62,8 +58,6 @@ object ConfigurationSingleton {
 
     fun getRA(): String? = AppPreferences.MyRaValue
 
-
-
     fun setFabLibrasVisibility(fab: View) {
         fab_libras = fab
         if (!AppPreferences.MyFabVisibility)
@@ -73,11 +67,10 @@ object ConfigurationSingleton {
     fun setBoldnessOnAllViews(view: View) {
         for (v in view.getAllViews()) {
             if (v is TextView) {
-                if (this.isBold) {
+                if (this.isBold)
                     v.typeface = Typeface.DEFAULT_BOLD
-                } else {
+                else
                     v.typeface = Typeface.DEFAULT
-                }
             }
         }
     }
@@ -116,11 +109,14 @@ object ConfigurationSingleton {
                     v.typeface = Typeface.DEFAULT_BOLD
                 else
                     v.typeface = Typeface.DEFAULT
-
-                if (v.text != "A")
+                if(canChangeSize(v))
                     v.textSize = fontSize.toFloat()
             }
         }
+    }
+
+    private fun canChangeSize(v: TextView): Boolean {
+        return v.id != R.id.big_a && v.id != R.id.lower_a
     }
 
 

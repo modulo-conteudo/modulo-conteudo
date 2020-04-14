@@ -1,4 +1,4 @@
-package com.ufabc.moduloconteudo.ui.configuration
+package com.ufabc.moduloconteudo.act_home.tabs.configuration
 
 import android.content.Context
 import android.content.SharedPreferences

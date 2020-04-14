@@ -1,4 +1,4 @@
-package com.ufabc.moduloconteudo
+package com.ufabc.moduloconteudo.act_add_class
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -10,11 +10,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.data.AppDatabase
 import com.ufabc.moduloconteudo.data.aula.Aula
 import com.ufabc.moduloconteudo.data.discente_turma.DiscenteTurma
-import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton.persistConfigModificationsOnAllViews
-import com.ufabc.moduloconteudo.utilities.RA_EXTRA
+import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton
+import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton.persistConfigModificationsOnAllViews
 import kotlinx.coroutines.runBlocking
 
 class AddClassActivity : AppCompatActivity() {
@@ -177,7 +178,7 @@ class AddClassActivity : AppCompatActivity() {
         persistConfigModificationsOnAllViews(getWindow().getDecorView().getRootView(), null)
 
 
-        studentRA = intent?.getStringExtra(RA_EXTRA).toString()
+        studentRA = ConfigurationSingleton.getRA().toString()
         week_days = resources.getStringArray(R.array.week_days)
         bindComponents()
         setClickEvents()

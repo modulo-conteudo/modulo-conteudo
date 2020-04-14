@@ -1,4 +1,4 @@
-package com.ufabc.moduloconteudo
+package com.ufabc.moduloconteudo.act_home
 
 import android.os.Bundle
 import android.view.View
@@ -9,7 +9,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
+import com.ufabc.moduloconteudo.R
+import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +21,7 @@ class HomeActivity : AppCompatActivity() {
         val fab : View = findViewById(R.id.fab_libras)
         ConfigurationSingleton.setFabLibrasVisibility(fab)
 
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener { _ ->
             Toast.makeText(this, "Abrir video com tradução em Libras", Toast.LENGTH_SHORT)
                 .show()
         }
@@ -31,7 +32,10 @@ class HomeActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_classes, R.id.navigation_archives, R.id.navigation_tutorial, R.id.navigation_configuration
+                R.id.navigation_classes,
+                R.id.navigation_archives,
+                R.id.navigation_tutorial,
+                R.id.navigation_configuration
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

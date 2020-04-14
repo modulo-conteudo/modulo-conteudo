@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.data.ClassName
-import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
+import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton
 import kotlinx.android.synthetic.main.item_archive_class_name.view.*
 
 class ArchiveClassNameListAdapter : RecyclerView.Adapter<ArchiveClassNameListAdapter.ArchiveClassNameListViewHolder> () {

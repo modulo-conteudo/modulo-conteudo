@@ -12,16 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".AddClassActivity"
-            android:label="@string/title_add_class"
-            />
+            android:name=".act_add_class.AddClassActivity"
+            android:label="@string/title_add_class" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".act_home.HomeActivity"
             android:label="@string/title_activity_home" />
-        <activity android:name=".LoginActivity">
+        <activity
+            android:name=".act_login.LoginActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_classes"
-        android:name="com.ufabc.moduloconteudo.ui.classes.ClassesFragment"
+        android:name="com.ufabc.moduloconteudo.act_home.tabs.classes.ClassesFragment"
         android:label="@string/title_classes"
         tools:layout="@layout/fragment_classes" />
 
     <fragment
         android:id="@+id/navigation_archives"
-        android:name="com.ufabc.moduloconteudo.ui.archives.ArchivesFragment"
+        android:name="com.ufabc.moduloconteudo.act_home.tabs.archives.ArchivesFragment"
         android:label="@string/title_archives"
         tools:layout="@layout/fragment_archives" />
 
     <fragment
         android:id="@+id/navigation_tutorial"
-        android:name="com.ufabc.moduloconteudo.ui.tutorial.TutorialFragment"
+        android:name="com.ufabc.moduloconteudo.act_home.tabs.tutorial.TutorialFragment"
         android:label="@string/title_tutorial"
         tools:layout="@layout/fragment_tutorial" />
 
     <fragment
         android:id="@+id/navigation_configuration"
-        android:name="com.ufabc.moduloconteudo.ui.configuration.ConfigurationFragment"
+        android:name="com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationFragment"
         android:label="@string/title_configuration"
         tools:layout="@layout/fragment_configuration" />
 

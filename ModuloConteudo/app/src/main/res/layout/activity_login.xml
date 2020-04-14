@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/linear_horizontal_gradient"
-    tools:context=".LoginActivity">
+    tools:context=".act_login.LoginActivity">
 
     <ImageView
         android:id="@+id/login_imgLogoUfabc"
