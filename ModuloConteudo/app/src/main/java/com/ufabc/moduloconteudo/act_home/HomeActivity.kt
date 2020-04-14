@@ -16,9 +16,11 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val fab : View = findViewById(R.id.fab_libras)
+
         ConfigurationSingleton.setFabLibrasVisibility(fab)
 
         fab.setOnClickListener { _ ->

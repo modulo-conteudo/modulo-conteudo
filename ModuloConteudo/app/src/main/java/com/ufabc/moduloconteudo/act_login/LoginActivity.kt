@@ -33,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ConfigurationSingleton.init(context)
+
         if (ConfigurationSingleton.getRA() != "") {
             studentRa.value = ConfigurationSingleton.getRA()
             openHomeActivity()

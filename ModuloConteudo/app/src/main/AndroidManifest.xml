@@ -18,6 +18,9 @@
             android:name=".act_home.HomeActivity"
             android:label="@string/title_activity_home" />
         <activity
+            android:name=".act_tut.TutorialImageActivity"
+            android:label="Tutorial" />
+        <activity
             android:name=".act_login.LoginActivity"
             android:noHistory="true">
             <intent-filter>
@@ -25,6 +28,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
+
+
     </application>
 
 </manifest>
