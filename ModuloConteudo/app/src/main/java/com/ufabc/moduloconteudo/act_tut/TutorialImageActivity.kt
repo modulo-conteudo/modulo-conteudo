@@ -11,6 +11,7 @@ import com.google.android.material.button.MaterialButton
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.R.drawable
 import com.ufabc.moduloconteudo.act_home.HomeActivity
+import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton
 
 
 class TutorialImageActivity : AppCompatActivity() {
@@ -33,12 +34,14 @@ class TutorialImageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial_images)
-
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(window.decorView.rootView, null)
 //        fillArrayWithImages()
         bindComponents()
         setClickEvents()
     }
 
+
+//  Código não sendo usado no momento.
 //    private fun fillArrayWithImages() {
 //        val drawableFiels = R.drawable::class.java.fields
 //
@@ -67,6 +70,7 @@ class TutorialImageActivity : AppCompatActivity() {
         text_counter = findViewById(R.id.tut_screen_shot_counter)
         text_counter.text = "1/${total_imgs}"
     }
+
 
     private fun setClickEvents() {
         next_btn.setOnClickListener { _ ->

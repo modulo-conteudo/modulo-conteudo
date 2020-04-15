@@ -21,6 +21,9 @@
             android:name=".act_tut.TutorialImageActivity"
             android:label="Tutorial" />
         <activity
+            android:name=".act_tut.TutorialVideoActivity"
+            android:label="Tutorial"/>
+        <activity
             android:name=".act_login.LoginActivity"
             android:noHistory="true">
             <intent-filter>
