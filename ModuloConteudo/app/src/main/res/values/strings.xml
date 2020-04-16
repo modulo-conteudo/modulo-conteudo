@@ -49,6 +49,12 @@
     <string name="inv_ra_btn_value">Entrar com outro RA</string>
     <string name="fab_btn_visibility">Visibilidade botão libras</string>
     <string name="title_add_class">Adicionar disciplina</string>
+    <string name="tut_header_text">Como deseja acessar o tutorial?</string>
+    <string name="tut_btn_video">Por vídeo com tradução em libras</string>
+    <string name="tut_btn_slide">Por apresentação de imagens</string>
+    <string name="content_description_tut_images">Imagem contendo imagens das telas do aplicativo.</string>
+    <string name="tut_text_counter">1/0</string>
+    <string name="tut_btn_exit">SAIR</string>
     <string-array name="week_days">
         <item>@string/sunday</item>
         <item>@string/monday</item>

@@ -16,4 +16,7 @@ interface AulaDao {
 
    @Insert(onConflict = OnConflictStrategy.REPLACE)
    suspend fun insertAula(aula : Aula)
+
+   @Delete
+   suspend fun deleteAula(aula: Aula)
 }

@@ -6,16 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.data.ClassName
-import com.ufabc.moduloconteudo.ui.configuration.ConfigurationSingleton
+import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton
+import com.ufabc.moduloconteudo.data.archives.GeneralClass
 import kotlinx.android.synthetic.main.item_archive_class_name.view.*
 
 class ArchiveClassNameListAdapter : RecyclerView.Adapter<ArchiveClassNameListAdapter.ArchiveClassNameListViewHolder> () {
 
-    var classes : List<ClassName> = arrayListOf()
-    var onItemClick : ((ClassName, position : Int) -> Unit)? = null
+    var classes : List<GeneralClass> = arrayListOf()
+    var onItemClick : ((GeneralClass, position : Int) -> Unit)? = null
 
-    fun setData(s : MutableList<ClassName>) {
-        classes = s
+    fun setData(s : List<GeneralClass>?) {
+        classes = if(s == null) emptyList() else s
         notifyDataSetChanged()
     }
 
@@ -39,7 +40,7 @@ class ArchiveClassNameListAdapter : RecyclerView.Adapter<ArchiveClassNameListAda
     }
 
     override fun onBindViewHolder(holder: ArchiveClassNameListViewHolder, position: Int) {
-        holder.className.text = classes[position].nome_turma
+        holder.className.text = classes[position].name
     }
 }
 
