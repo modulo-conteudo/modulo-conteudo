@@ -2,6 +2,7 @@ package com.ufabc.moduloconteudo.act_home.tabs.classes
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import com.ufabc.moduloconteudo.adapters.ClassesListAdapter
 import com.ufabc.moduloconteudo.data.aula.Aula
 import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton
 import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton.persistConfigModificationsOnAllViews
+import com.ufabc.moduloconteudo.data.relations.AulasDiscente
 import com.ufabc.moduloconteudo.utilities.AppUtils
 import kotlinx.android.synthetic.main.fragment_classes.*
 import java.util.*
@@ -165,6 +167,7 @@ class ClassesFragment : Fragment() {
                 recyclerClasses.visibility = View.VISIBLE
             }
 
+            updateSharedClassList(it)
             updateClassesList()
         })
 
@@ -176,6 +179,10 @@ class ClassesFragment : Fragment() {
             currDayClasses.sortWith(compareBy( {it.horario_inicio}, {it.codigo_sie}))
             classesListAdapter.setData(currDayClasses)
         })
+    }
+
+    private fun updateSharedClassList(list : List<AulasDiscente>) {
+        ConfigurationSingleton.setListClass(list)
     }
 
     private fun startAddClassActivity() {

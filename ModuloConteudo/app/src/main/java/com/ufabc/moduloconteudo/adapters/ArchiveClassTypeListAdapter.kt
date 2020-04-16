@@ -5,14 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ufabc.moduloconteudo.R
-import com.ufabc.moduloconteudo.data.ClassDocument
 import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton
 import kotlinx.android.synthetic.main.item_archive_class_document.view.*
 
-class ArchiveClassDocumentListAdapter : RecyclerView.Adapter<ArchiveClassDocumentListAdapter.ArchiveClassDocumentListViewHolder> () {
+class ArchiveClassTypeListAdapter : RecyclerView.Adapter<ArchiveClassTypeListAdapter.ArchiveClassDocumentListViewHolder> () {
 
-    var classDocuments : List<ClassDocument> = emptyList()
-    var onItemClick : ((ClassDocument, posisiton : Int) -> Unit)? = null
+    var classDocuments : List<String> = emptyList()
+    var onItemClick : ((String, posisiton : Int) -> Unit)? = null
 
     inner class ArchiveClassDocumentListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val description = itemView.adapter_classDocument
@@ -24,7 +23,7 @@ class ArchiveClassDocumentListAdapter : RecyclerView.Adapter<ArchiveClassDocumen
         }
     }
 
-    fun setData(s : MutableList<ClassDocument>) {
+    fun setData(s : List<String>) {
         classDocuments = s
         notifyDataSetChanged()
     }
@@ -40,6 +39,6 @@ class ArchiveClassDocumentListAdapter : RecyclerView.Adapter<ArchiveClassDocumen
     }
 
     override fun onBindViewHolder(holder: ArchiveClassDocumentListViewHolder, position: Int) {
-        holder.description.text = classDocuments[position].description
+        holder.description.text = classDocuments[position]
     }
 }

@@ -13,17 +13,20 @@ import com.ufabc.moduloconteudo.data.discente.Discente
 import com.ufabc.moduloconteudo.data.discente.DiscenteDao
 import com.ufabc.moduloconteudo.data.discente_turma.DiscenteTurma
 import com.ufabc.moduloconteudo.data.discente_turma.DiscenteTurmaDao
+import com.ufabc.moduloconteudo.data.archives.GeneralClass
+import com.ufabc.moduloconteudo.data.archives.GeneralClassDao
 import com.ufabc.moduloconteudo.data.turma.Turma
 import com.ufabc.moduloconteudo.data.turma.TurmaDao
 import com.ufabc.moduloconteudo.utilities.DATABASE_NAME
 import com.ufabc.moduloconteudo.workers.SeedDatabaseWorker
 
-@Database(entities = [Discente::class, DiscenteTurma::class, Turma::class, Aula::class], version = 1)
+@Database(entities = [Discente::class, DiscenteTurma::class, Turma::class, Aula::class, GeneralClass::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun discenteDao() : DiscenteDao
     abstract fun turmaDao() : TurmaDao
     abstract fun discenteTurmaDao() : DiscenteTurmaDao
     abstract fun aulaDao() : AulaDao
+    abstract fun generalClassDao() : GeneralClassDao
 
     companion object {
         // Create Singleton
