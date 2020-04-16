@@ -7,12 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.data.ClassNumber
 import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton
+import com.ufabc.moduloconteudo.data.archives.SingleClass
 import kotlinx.android.synthetic.main.item_archive_class_number.view.*
 
 class ArchiveClassNumberListAdapter : RecyclerView.Adapter<ArchiveClassNumberListAdapter.ArchiveClassNumberListViewHolder> (){
 
-    var classNumbers : List<ClassNumber> = emptyList()
-    var onItemClick : ((ClassNumber, position : Int) -> Unit)? = null
+    var classNumbers : List<SingleClass> = emptyList()
+    var onItemClick : ((SingleClass, position : Int) -> Unit)? = null
 
     inner class ArchiveClassNumberListViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
         val classNumber = itemView.adapter_classNumber
@@ -23,8 +24,8 @@ class ArchiveClassNumberListAdapter : RecyclerView.Adapter<ArchiveClassNumberLis
         }
     }
 
-    fun setData (s : MutableList<ClassNumber>){
-        classNumbers = s
+    fun setData (s : List<SingleClass>?){
+        classNumbers = if(s == null) emptyList() else s
         notifyDataSetChanged()
     }
 
@@ -39,6 +40,6 @@ class ArchiveClassNumberListAdapter : RecyclerView.Adapter<ArchiveClassNumberLis
     }
 
     override fun onBindViewHolder(holder: ArchiveClassNumberListViewHolder, position: Int) {
-        holder.classNumber.text = "Aula ${classNumbers[position].id}"
+        holder.classNumber.text = classNumbers[position].name
     }
 }

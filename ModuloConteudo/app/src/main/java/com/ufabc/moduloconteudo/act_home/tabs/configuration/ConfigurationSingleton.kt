@@ -11,14 +11,16 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.TextView
 import androidx.core.view.children
+import androidx.lifecycle.MutableLiveData
 import com.ufabc.moduloconteudo.R
+import com.ufabc.moduloconteudo.data.archives.GeneralClass
+import com.ufabc.moduloconteudo.data.relations.AulasDiscente
 import kotlinx.android.synthetic.main.fragment_configuration.view.*
 import kotlin.properties.Delegates
 
 
 object ConfigurationSingleton {
     private val normalSizeFont = 16
-
 
     private var isBold:Boolean = false
     private var isHighContrast:Boolean = false
@@ -28,7 +30,9 @@ object ConfigurationSingleton {
     private var is_vibrate_enable:Boolean = false
 
     private var fontSize by Delegates.notNull<Int>()
-    lateinit private var fab_libras : View
+    private lateinit var fab_libras : View
+
+    private var listClass = listOf<AulasDiscente>()
 
     fun init(context: Context?) {
         if (context != null) {
@@ -51,6 +55,12 @@ object ConfigurationSingleton {
         }
         fontSize = normalSizeFont + ((seekBar_positioning-1) * 3)
     }
+
+    fun setListClass(list : List<AulasDiscente>) {
+        listClass = list
+    }
+
+    fun getListClass(): List<AulasDiscente> = listClass
 
     fun setRA(ra : String) {
         AppPreferences.MyRaValue = ra
