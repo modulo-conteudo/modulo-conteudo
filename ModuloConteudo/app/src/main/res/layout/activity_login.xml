@@ -5,17 +5,27 @@
     android:id="@+id/login_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/linear_horizontal_gradient"
+    android:background="@color/colorWhite"
     tools:context=".act_login.LoginActivity">
 
-    <ImageView
-        android:id="@+id/login_imgLogoUfabc"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/colorWhite"
+        app:menu="@menu/top_bar_menu"
+        app:navigationIcon="@drawable/logo_ufabc_24dp"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:src="@drawable/logo_ufabc"
-        android:layout_width="70dp"
-        android:layout_height="70dp"/>
+        />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
     <ImageView
         android:id="@+id/login_imgLogo"
         android:layout_width="match_parent"
@@ -23,7 +33,7 @@
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/logo_description"
         android:src="@drawable/logo_conteudo"
-        app:layout_constraintTop_toBottomOf="@id/login_imgLogoUfabc"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
@@ -56,5 +66,5 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_tilRa" />
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

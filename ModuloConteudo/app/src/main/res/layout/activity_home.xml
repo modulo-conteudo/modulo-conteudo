@@ -5,6 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/colorWhite"
+        app:menu="@menu/top_bar_menu"
+        app:navigationIcon="@drawable/logo_ufabc_24dp"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_libras"
         android:src="@drawable/libras_icon"
@@ -29,7 +42,7 @@
         app:layout_constraintBottom_toTopOf="@id/home_bottom_nav_separator"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:navGraph="@navigation/mobile_navigation" />
 
     <View
