@@ -30,6 +30,18 @@
     <string name="santo_andre">Santo André</string>
     <string name="sao_bernardo">São Bernardo</string>
     <string name="type">Tipo</string>
+
+    <string name="boldTitle">Configuração negrito</string>
+    <string name="colorTitle">Configuração de cores</string>
+    <string name="fontsTitle">Configuração de fonte</string>
+    <string name="highContrastTitle">Configuração contraste</string>
+    <string name="vibrateTitle">Configuração de vibração</string>
+    <string name="librasTitle">Configuração contraste</string>
+
+    <string name="sim">SIM</string>
+    <string name="nao">NÃO</string>
+
+
     <string name="theory">Teoria</string>
     <string name="practice">Prática</string>
     <string name="general_info">INFORMAÇÕES GERAIS</string>
@@ -55,6 +67,10 @@
     <string name="content_description_tut_images">Imagem contendo imagens das telas do aplicativo.</string>
     <string name="tut_text_counter">1/0</string>
     <string name="tut_btn_exit">SAIR</string>
+    <string name="texto_em_negrito">Texto em negrito</string>
+    <string name="vibrar_ao_mudar_de_tela">Vibrar ao mudar de tela</string>
+    <string name="ativar_o_bot_o_libras">Ativar o botão libras</string>
+    <string name="tamanho_das_letras">Tamanho das letras</string>
     <string-array name="week_days">
         <item>@string/sunday</item>
         <item>@string/monday</item>

@@ -85,8 +85,8 @@ object ConfigurationSingleton {
         }
     }
 
-    fun changeBoldness(view: View, btn: CompoundButton) {
-        this.isBold = !this.isBold
+    fun changeBoldness(v : Boolean) {
+        this.isBold = v
         AppPreferences.MyBoldStatus = isBold
     }
 
@@ -142,21 +142,21 @@ object ConfigurationSingleton {
 
     }
 
-    fun bigText(view: View, i: Int) {
+    fun bigText(view: TextView, i: Int) {
         seekBar_positioning = i
         fontSize = normalSizeFont + ((seekBar_positioning-1) *3)
         AppPreferences.MyFontSizeStatus = seekBar_positioning
 
-        view.font_size_text_view.text = "Tamanho da fonte: ${font_text[seekBar_positioning]}"
+        view.text = "Tamanho da fonte: ${font_text[seekBar_positioning]}"
     }
 
-    fun setSwitchPositioning(view: View) {
-        view.font_size_text_view.text = "Tamanho da fonte: ${font_text[seekBar_positioning]}"
-        view.bold_switch.isChecked = this.isBold
-        view.vibrate_switch.isChecked = is_vibrate_enable
-        view.fab_btn_visibility.isChecked = AppPreferences.MyFabVisibility
-        view.seekBar.progress = this.seekBar_positioning
-    }
+//    fun setSwitchPositioning(view: View) {
+//        view.font_size_text_view.text = "Tamanho da fonte: ${font_text[seekBar_positioning]}"
+//        view.bold_switch.isChecked = this.isBold
+//        view.vibrate_switch.isChecked = is_vibrate_enable
+//        view.fab_btn_visibility.isChecked = AppPreferences.MyFabVisibility
+//        view.seekBar.progress = this.seekBar_positioning
+//    }
 
     // Torcer pra essa porcaria não ir ao infinito e além
     private fun View.getAllViews(): List<View> {
@@ -171,6 +171,4 @@ object ConfigurationSingleton {
         is_vibrate_enable = isChecked
         AppPreferences.MyVibrateOption = is_vibrate_enable
     }
-
-
 }

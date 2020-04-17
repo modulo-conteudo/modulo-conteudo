@@ -15,6 +15,24 @@
             android:name=".act_add_class.AddClassActivity"
             android:label="@string/title_add_class" />
         <activity
+            android:name=".act_config.BoldTextActivity"
+            android:label="@string/boldTitle" />
+        <activity
+            android:name=".act_config.ColorSelectorActivity"
+            android:label="@string/colorTitle" />
+        <activity
+            android:name=".act_config.FontSizeActivity"
+            android:label="@string/fontsTitle" />
+        <activity
+            android:name=".act_config.HighContrastActivity"
+            android:label="@string/highContrastTitle" />
+        <activity
+            android:name=".act_config.LibrasBtbActivity"
+            android:label="@string/librasTitle" />
+        <activity
+            android:name=".act_config.VibrateActivity"
+            android:label="@string/vibrateTitle" />
+        <activity
             android:name=".act_home.HomeActivity"
             android:label="@string/title_activity_home" />
         <activity

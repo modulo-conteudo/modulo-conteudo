@@ -82,7 +82,8 @@ class TutorialImageActivity : AppCompatActivity() {
         }
 
         exit_btn.setOnClickListener { _ ->
-            exitToHomeActivity()
+            finish()
+//            exitToHomeActivity()
         }
     }
 
@@ -99,8 +100,8 @@ class TutorialImageActivity : AppCompatActivity() {
 
 
 
-    private fun exitToHomeActivity() {
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent, null)
-    }
+//    private fun exitToHomeActivity() {
+//        val intent = Intent(this, HomeActivity::class.java)
+//        startActivity(intent, null)
+//    }
 }

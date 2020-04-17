@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/font_size_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Tamanho da fonte"
+        android:textColor="@color/colorDarkGrey"
+        android:textSize="@dimen/body"
+        app:layout_constraintBottom_toTopOf="@+id/lower_a"
+        app:layout_constraintStart_toStartOf="@+id/lower_a" />
+
+
+    <TextView
+        android:id="@+id/lower_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:layout_marginStart="10dp"
+        android:text="A"
+        android:textColor="@color/colorDarkGrey"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        android:max="3"
+        android:progress="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/big_a"
+        app:layout_constraintStart_toEndOf="@+id/lower_a"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/big_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:layout_marginEnd="14dp"
+        android:text="A"
+        android:textColor="@color/colorDarkGrey"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/config_btn_default"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="padrão"
+        app:layout_constraintBottom_toTopOf="@+id/config_fs_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+    <Button
+        android:id="@+id/config_fs_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
