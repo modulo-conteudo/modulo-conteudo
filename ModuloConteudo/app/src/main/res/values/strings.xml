@@ -55,6 +55,7 @@
     <string name="content_description_tut_images">Imagem contendo imagens das telas do aplicativo.</string>
     <string name="tut_text_counter">1/0</string>
     <string name="tut_btn_exit">SAIR</string>
+    <string name="action_libras">Tradução para Libras</string>
     <string-array name="week_days">
         <item>@string/sunday</item>
         <item>@string/monday</item>

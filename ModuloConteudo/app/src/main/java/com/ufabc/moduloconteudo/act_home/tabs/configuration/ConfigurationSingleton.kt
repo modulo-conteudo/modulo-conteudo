@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.core.view.children
 import androidx.lifecycle.MutableLiveData
 import com.ufabc.moduloconteudo.R
@@ -115,14 +116,20 @@ object ConfigurationSingleton {
 
         for (v in view.getAllViews()) {
             if (v is TextView) {
-                if (isBold)
-                    v.typeface = Typeface.DEFAULT_BOLD
-                else
-                    v.typeface = Typeface.DEFAULT
+                if(canChangeBoldness(v)) {
+                    if (isBold)
+                        v.typeface = Typeface.DEFAULT_BOLD
+                    else
+                        v.typeface = Typeface.DEFAULT
+                }
                 if(canChangeSize(v))
                     v.textSize = fontSize.toFloat()
             }
         }
+    }
+
+    private fun canChangeBoldness(v: TextView): Boolean {
+        return v.text != "Módulo Conteúdo"
     }
 
     private fun canChangeSize(v: TextView): Boolean {
