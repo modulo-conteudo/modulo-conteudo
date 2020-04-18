@@ -3,6 +3,7 @@ package com.ufabc.moduloconteudo.act_config
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
+import com.ufabc.moduloconteudo.App.Companion.context
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton
 
@@ -14,6 +15,7 @@ class LibrasBtbActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config_libras_btn)
 
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(window.decorView.rootView, context)
         bindComponents()
         listeners()
     }

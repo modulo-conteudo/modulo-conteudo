@@ -74,6 +74,10 @@
     <string name="tamanho_das_letras">Tamanho das letras</string>
 
     <string name="action_libras">Tradução para Libras</string>
+    <string name="selecione_a_cor_do_fundo">Selecione a cor do fundo</string>
+    <string name="selecione_a_cor_do_texto">Selecione a cor do texto</string>
+    <string name="colors_title">Cores</string>
+    <string name="default_text">Padrão</string>
 
     <string-array name="week_days">
         <item>@string/sunday</item>

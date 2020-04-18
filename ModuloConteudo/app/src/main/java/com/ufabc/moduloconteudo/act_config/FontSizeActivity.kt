@@ -5,6 +5,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
+import com.ufabc.moduloconteudo.App.Companion.context
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.act_home.tabs.configuration.AppPreferences
 import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton
@@ -21,6 +22,7 @@ class FontSizeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config_font_size)
 
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(window.decorView.rootView, context)
         bindComponents()
         setListeners()
     }

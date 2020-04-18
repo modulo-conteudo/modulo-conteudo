@@ -30,7 +30,8 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/tut_btn_video" />
+            android:text="@string/tut_btn_video"
+            android:textColor="@color/colorWhite" />
 
         <Button
             android:id="@+id/tut_btn_slide"
@@ -39,6 +40,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="8dp"
-            android:text="@string/tut_btn_slide" />
+            android:text="@string/tut_btn_slide"
+            android:textColor="@color/colorWhite" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 object AppPreferences {
+
     private const val NAME = "configPrefFile"
     private const val MODE = Context.MODE_PRIVATE
     private lateinit var preferences: SharedPreferences
@@ -16,6 +17,10 @@ object AppPreferences {
     private val FS_STATUS = Pair("font_size_", 1)
     private val RA_VALUE  = Pair("ra_value", "")
     private val VIBRATE_STATUS = Pair("is_vibrate_enable", false)
+
+    private val BG_COLOR_STATUS = Pair("bg_color_mc", "#FFFFFF")
+    private val TXT_COLOR_STATUS = Pair("txt_color_mc", "#373737")
+    private val DEF_COLOR_STATUS = Pair("def_color_mc", false)
 
 
     fun init(context: Context) {
@@ -45,6 +50,13 @@ object AppPreferences {
 
         set(value) = preferences.edit {
             it.putBoolean(BOLD_STATUS.first, value)
+        }
+
+    var MyDefColor: Boolean
+        get() = preferences.getBoolean(DEF_COLOR_STATUS.first, DEF_COLOR_STATUS.second)
+
+        set(value) = preferences.edit {
+            it.putBoolean(DEF_COLOR_STATUS.first, value)
         }
 
 
@@ -82,5 +94,18 @@ object AppPreferences {
 
         set(value) = preferences.edit {
             it.putBoolean(FAB_LIBRAS_STATUS.first, value)
+        }
+
+    var MyTxtColor: String?
+        get() = preferences.getString(TXT_COLOR_STATUS.first, TXT_COLOR_STATUS.second)
+
+        set(value) = preferences.edit {
+            it.putString(TXT_COLOR_STATUS.first, value)
+        }
+    var MyBGColor: String?
+        get() = preferences.getString(BG_COLOR_STATUS.first, BG_COLOR_STATUS.second)
+
+        set(value) = preferences.edit {
+            it.putString(BG_COLOR_STATUS.first, value)
         }
 }

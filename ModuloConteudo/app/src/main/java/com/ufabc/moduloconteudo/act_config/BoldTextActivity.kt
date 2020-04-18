@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
+import com.ufabc.moduloconteudo.App.Companion.context
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton
 
@@ -19,6 +20,7 @@ class BoldTextActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config_bold)
 
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(window.decorView.rootView, context)
         bindComponents()
         listeners()
     }

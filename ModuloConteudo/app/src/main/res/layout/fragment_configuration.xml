@@ -7,77 +7,80 @@
     android:textStyle="bold"
     tools:context=".act_home.tabs.configuration.ConfigurationFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="#00CC3131"
+        android:backgroundTint="#006F0D0D">
 
-        <View
-            android:id="@+id/divider"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#00CC3131"
-            android:backgroundTint="#006F0D0D">
-
-            <LinearLayout
+            <Button
+                android:id="@+id/bold_switch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:orientation="vertical">
+                android:layout_marginBottom="20dp"
+                android:text="@string/config_negrito"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/body" />
 
-                <Button
-                    android:id="@+id/bold_switch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:text="@string/config_negrito"
-                    android:textSize="@dimen/body" />
+            <Button
+                android:id="@+id/high_contrast_switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/high_c_switch_value"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/body" />
 
-                <Button
-                    android:id="@+id/high_contrast_switch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:text="@string/high_c_switch_value"
-                    android:textSize="@dimen/body" />
+            <Button
+                android:id="@+id/vibrate_switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/vbr_in_touch"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/body" />
 
-                <Button
-                    android:id="@+id/vibrate_switch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:text="@string/vbr_in_touch"
-                    android:textSize="@dimen/body" />
+            <Button
+                android:id="@+id/fab_btn_visibility"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/fab_btn_visibility"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/body" />
 
-                <Button
-                    android:id="@+id/fab_btn_visibility"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:text="@string/fab_btn_visibility"
-                    android:textSize="@dimen/body" />
+            <Button
+                android:id="@+id/font_size_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/tamanho_das_letras"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/body" />
 
-                <Button
-                    android:id="@+id/font_size_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:text="@string/tamanho_das_letras"
-                    android:textSize="@dimen/body" />
+            <Button
+                android:id="@+id/color_selectors_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/colors_title"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/body" />
 
-                <Button
-                    android:id="@+id/invalidate_ra_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/inv_ra_btn_value" />
+            <Button
+                android:id="@+id/invalidate_ra_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/inv_ra_btn_value"
+                android:textColor="@color/colorWhite" />
 
-            </LinearLayout>
-        </ScrollView>
+        </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
 </FrameLayout>
