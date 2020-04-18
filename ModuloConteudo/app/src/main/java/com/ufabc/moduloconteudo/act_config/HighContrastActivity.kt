@@ -8,6 +8,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ufabc.moduloconteudo.App.Companion.context
 import com.ufabc.moduloconteudo.R
+import com.ufabc.moduloconteudo.act_home.tabs.configuration.AppPreferences
 import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton
 
 
@@ -26,34 +27,18 @@ class HighContrastActivity : AppCompatActivity() {
 
     private fun listeners() {
         btn_yes.setOnClickListener { _ ->
-//            changeFragment(ConfigurationFragment())
+            ConfigurationSingleton.setRestartNeeded(!AppPreferences.MyHighContrastStatus)
             ConfigurationSingleton.changeHighContrastOpt(true)
-            ConfigurationSingleton.setRestartNeeded(true)
             finish()
         }
 
         btn_no.setOnClickListener { _ ->
+            ConfigurationSingleton.setRestartNeeded(AppPreferences.MyHighContrastStatus)
             ConfigurationSingleton.changeHighContrastOpt(false)
-//            changeFragment(ConfigurationFragment())
-            ConfigurationSingleton.setRestartNeeded(true)
             finish()
         }
     }
 
-    private fun changeFragment(targetFragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.nav_host_fragment, targetFragment, "fragment")
-            .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-            .commit()
-    }
-
-    private fun _finish() {
-//        val intent = Intent(context, HomeActivity::class.java)
-//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//        startActivity(intent, null)
-        finish()
-    }
 
     private fun bindComponents() {
         btn_yes = findViewById(R.id.config_high_contrast_yes)

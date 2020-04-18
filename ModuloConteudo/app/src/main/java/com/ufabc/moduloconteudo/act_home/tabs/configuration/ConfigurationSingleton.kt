@@ -14,10 +14,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toolbar
+import android.widget.*
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.view.menu.MenuAdapter
 import androidx.appcompat.view.menu.MenuView
@@ -98,6 +95,7 @@ object ConfigurationSingleton {
             AppPreferences.MyBGColor = "#FFFFFF"
             AppPreferences.MyTxtColor = "#373737"
             AppPreferences.MyDefColor = false
+
         } else {
             isBold = AppPreferences.MyBoldStatus
             seekBar_positioning = AppPreferences.MyFontSizeStatus
@@ -131,16 +129,16 @@ object ConfigurationSingleton {
             fab.visibility = View.GONE
     }
 
-    fun setBoldnessOnAllViews(view: View) {
-        for (v in view.getAllViews()) {
-            if (v is TextView) {
-                if (this.isBold)
-                    v.typeface = Typeface.DEFAULT_BOLD
-                else
-                    v.typeface = Typeface.DEFAULT
-            }
-        }
-    }
+//    fun setBoldnessOnAllViews(view: View) {
+//        for (v in view.getAllViews()) {
+//            if (v is TextView) {
+//                if (this.isBold)
+//                    v.typeface = Typeface.DEFAULT_BOLD
+//                else
+//                    v.typeface = Typeface.DEFAULT
+//            }
+//        }
+//    }
 
     fun changeBoldness(v : Boolean) {
         this.isBold = v
@@ -156,14 +154,14 @@ object ConfigurationSingleton {
             fab_libras.visibility = View.GONE
     }
 
-    fun changeConfigExample(txt:TextView) {
-        if (this.isBold) {
-            txt.typeface = Typeface.DEFAULT_BOLD
-        } else {
-            txt.typeface = Typeface.DEFAULT
-        }
-        txt.textSize = fontSize.toFloat()
-    }
+//    fun changeConfigExample(txt:TextView) {
+//        if (this.isBold) {
+//            txt.typeface = Typeface.DEFAULT_BOLD
+//        } else {
+//            txt.typeface = Typeface.DEFAULT
+//        }
+//        txt.textSize = fontSize.toFloat()
+//    }
 
 
 
@@ -188,7 +186,6 @@ object ConfigurationSingleton {
             }
             if (!defaultColorsSelected) decideHowToChangeColors(v)
             if(AppPreferences.MyHighContrastStatus) invertColor(v)
-
         }
     }
 
@@ -196,16 +193,27 @@ object ConfigurationSingleton {
         if (v is MenuView || v is BottomNavigationView) {
             v.setBackgroundColor(LGREEN)
 
-        } else if (v is MaterialButton && v.id != R.id.adapter_btnRemove && v.id != R.id.login_imgLogo) {
+        } else if (v is CardView) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                v.setOutlineAmbientShadowColor(Color.WHITE)
+            }
+
+
+        }else if (v is MaterialButton && v.id != R.id.adapter_btnRemove && v.id != R.id.login_imgLogo) {
             v.setBackgroundColor(LGREEN)
-            v.setTextColor(negative(v.currentTextColor))
+            v.setTextColor(Color.BLACK)
+
+
+        } else if(v is RadioButton) {
+            v.setTextColor(Color.WHITE)
 
         } else if(v is ImageButton) {
             v.setBackgroundColor(LGREEN)
-        }
 
-        else if(v is TextView) {
-            v.setTextColor(negative(v.currentTextColor))
+        } else if(v is TextView) {
+            if (v.id == R.id.home_txtCurrentDay) v.setTextColor(Color.WHITE)
+            else v.setTextColor(negative(v.currentTextColor))
+
             if (v.text == "Módulo Conteúdo") v.setBackgroundColor(LGREEN)
 
         } else if (v is ConstraintLayout || v is FrameLayout) {
@@ -225,11 +233,12 @@ object ConfigurationSingleton {
         if ((v is MaterialButton || v is TextView)) {
             v.setBackgroundColor(Color.parseColor(AppPreferences.MyBGColor))
 
-        } else if (v is ConstraintLayout || v is FrameLayout) {
-            val colorint = Color.parseColor(AppPreferences.MyBGColor)
-            v.setBackgroundColor(negative(colorint))
-
         }
+//        else if (v is ConstraintLayout || v is FrameLayout) {
+//            val colorint = Color.parseColor(AppPreferences.MyBGColor)
+//            v.setBackgroundColor(negative(colorint))
+//
+//        }
 //        else if (v is NavigationView || v is Toolbar) {
 //            val colorint = Color.parseColor("#1E6824")
 //            v.setBackgroundColor(negative(colorint))

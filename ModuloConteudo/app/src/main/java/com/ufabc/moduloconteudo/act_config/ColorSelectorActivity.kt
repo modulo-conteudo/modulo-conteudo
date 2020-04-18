@@ -16,6 +16,7 @@ import com.google.android.material.button.MaterialButton
 import com.ufabc.moduloconteudo.App.Companion.context
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.act_home.HomeActivity
+import com.ufabc.moduloconteudo.act_home.tabs.configuration.AppPreferences
 import com.ufabc.moduloconteudo.act_home.tabs.configuration.ConfigurationSingleton
 
 class ColorSelectorActivity : AppCompatActivity() {
@@ -56,6 +57,7 @@ class ColorSelectorActivity : AppCompatActivity() {
                 val hex = "#" + Integer.toHexString(pixelFundo)
                 example_tv.setTextColor(Color.rgb(r, g, b))
                 rgb_color_text = hex
+                ConfigurationSingleton.setRestartNeeded(true)
                 default_selected = false
             }
             false
@@ -75,7 +77,9 @@ class ColorSelectorActivity : AppCompatActivity() {
                 example_tv.setBackgroundColor(Color.rgb(r, g, b))
                 rgb_color_bg = hex
                 default_selected = false
+                ConfigurationSingleton.setRestartNeeded(true)
             }
+
             false
         })
 
@@ -83,23 +87,20 @@ class ColorSelectorActivity : AppCompatActivity() {
             rgb_color_text = "#373737"
             rgb_color_bg   = "#FFFFFF"
 
-            example_tv.setBackgroundColor(Color.parseColor(rgb_color_bg))
-            example_tv.setTextColor(Color.parseColor(rgb_color_text))
+            if (!AppPreferences.MyHighContrastStatus) {
+                example_tv.setBackgroundColor(Color.parseColor(rgb_color_bg))
+                example_tv.setTextColor(Color.parseColor(rgb_color_text))
+            }
             default_selected = true
+            ConfigurationSingleton.setRestartNeeded(!AppPreferences.MyDefColor)
+            ConfigurationSingleton.ChangeColors(rgb_color_text, rgb_color_bg, default_selected)
+            finish()
         }
 
         save_btn.setOnClickListener { _ ->
             ConfigurationSingleton.ChangeColors(rgb_color_text, rgb_color_bg, default_selected)
-            _finish()
+            finish()
         }
-    }
-
-    private fun _finish() {
-//        val intent = Intent(context, HomeActivity::class.java)
-//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//        startActivity(intent, null)
-        ConfigurationSingleton.setRestartNeeded(true)
-        finish()
     }
 
     private fun bindComponents() {

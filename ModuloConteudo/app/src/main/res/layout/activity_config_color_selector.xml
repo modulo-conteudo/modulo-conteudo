@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="EXEMPLO"
+        android:text="@string/exemplo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +37,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_color_tv"
-        app:srcCompat="@drawable/cor_escura" />
+        app:srcCompat="@drawable/cor_escura"
+        android:contentDescription="@string/imagem_contendo_a_paleta_de_cores" />
 
     <TextView
         android:id="@+id/textView3"
@@ -66,6 +67,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
+        android:contentDescription="@string/imagem_contendo_a_paleta_de_cores"
         app:srcCompat="@drawable/cor_escura" />
 
     <LinearLayout

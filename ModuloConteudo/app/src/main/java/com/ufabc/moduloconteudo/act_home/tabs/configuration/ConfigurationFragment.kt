@@ -18,11 +18,6 @@ import kotlinx.android.synthetic.main.fragment_configuration.view.*
 
 
 class ConfigurationFragment : Fragment(){
-    private val BOLD_ACTIVITY_REQUEST_CODE = 0
-    private val HIGH_CONTRAST_ACTIVITY_REQUEST_CODE = 1
-    private val VIBRATE__ACTIVITY_REQUEST_CODE = 2
-    private val FAB_VI_ACTIVITY_REQUEST_CODE = 3
-
     companion object {
         fun newInstance() = ConfigurationFragment()
     }
@@ -34,16 +29,13 @@ class ConfigurationFragment : Fragment(){
 
         val view : View = inflater.inflate(R.layout.fragment_configuration, container, false)
         v = view
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(view, null)
 
-
-
-//        ConfigurationSingleton.setSwitchPositioning(view)
 
         // Listener for bold text switch on runtime
         view.bold_switch.setOnClickListener { _ ->
             val intent = Intent(context, BoldTextActivity::class.java)
             startActivity(intent, null)
-//            ConfigurationSingleton.persistConfigModificationsOnAllViews(view, null)
 
         }
 
@@ -57,7 +49,6 @@ class ConfigurationFragment : Fragment(){
         view.vibrate_switch.setOnClickListener {_ ->
             val intent = Intent(context, VibrateActivity::class.java)
             startActivity(intent, null)
-//            ConfigurationSingleton.persistConfigModificationsOnAllViews(view, null)
         }
 
         view.invalidate_ra_btn.setOnClickListener { _ ->
@@ -69,32 +60,38 @@ class ConfigurationFragment : Fragment(){
         view.fab_btn_visibility.setOnClickListener { _ ->
             val intent = Intent(context, LibrasBtbActivity::class.java)
             startActivity(intent, null)
-//            ConfigurationSingleton.persistConfigModificationsOnAllViews(view, null)
         }
 
         view.font_size_btn.setOnClickListener { _ ->
             val intent = Intent(context, FontSizeActivity::class.java)
             startActivityForResult(intent, 0)
-//            ConfigurationSingleton.persistConfigModificationsOnAllViews(view, null)
         }
 
         view.color_selectors_btn.setOnClickListener { _ ->
-            val intent = Intent(context, ColorSelectorActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            startActivityForResult(intent, 2)
-//            ConfigurationSingleton.persistConfigModificationsOnAllViews(view, null)
+            if (AppPreferences.MyHighContrastStatus) {
+                warn_hc_activated()
+            } else {
+                val intent = Intent(context, ColorSelectorActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivityForResult(intent, 2)
+            }
         }
 
         return view
     }
 
+    private fun warn_hc_activated() {
+        MaterialAlertDialogBuilder(context)
+            .setTitle("AVISO")
+            .setMessage("Não é possível alterar as cores no modo de alto contraste")
+            .setPositiveButton("OK"){_, _ ->}
+            .setCancelable(false)
+            .show()
+    }
+
+
     override fun onResume() {
         super.onResume()
-
-        // This sets the default boldness of a view in onResume time
-        ConfigurationSingleton.persistConfigModificationsOnAllViews(v, context)
-
-        // This restarts activity if is necessary
         if(ConfigurationSingleton.getRestartNeeded())
             callRestartAlertDialog()
     }

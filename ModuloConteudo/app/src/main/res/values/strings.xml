@@ -78,6 +78,11 @@
     <string name="selecione_a_cor_do_texto">Selecione a cor do texto</string>
     <string name="colors_title">Cores</string>
     <string name="default_text">Padrão</string>
+    <string name="tema_de_alto_contraste">Tema de alto contraste?</string>
+    <string name="exemplo">EXEMPLO</string>
+    <string name="imagem_contendo_a_paleta_de_cores">Imagem contendo a paleta de cores</string>
+    <string name="tamanho_da_fonte">Tamanho da fonte</string>
+    <string name="padr_o">padrão</string>
 
     <string-array name="week_days">
         <item>@string/sunday</item>
