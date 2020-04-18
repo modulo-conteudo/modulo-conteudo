@@ -52,10 +52,11 @@ class ArchivesFragment : Fragment() {
     lateinit var recyclerArchives : RecyclerView
     lateinit var btnBack : ImageButton
     lateinit var txtHistory : TextView
+    lateinit var root : View
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
         archivesViewModel = ViewModelProviders.of(this).get(ArchivesViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_archives, container, false)
+        root = inflater.inflate(R.layout.fragment_archives, container, false)
 
         bindComponents(root)
         setObservers(root)
@@ -63,6 +64,11 @@ class ArchivesFragment : Fragment() {
         ConfigurationSingleton.persistConfigModificationsOnAllViews(root, context)
 
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(root, context)
     }
 
     private fun bindComponents(root: View) {

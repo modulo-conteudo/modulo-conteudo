@@ -37,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
         if (ConfigurationSingleton.getRA() != "") {
             studentRa.value = ConfigurationSingleton.getRA()
             openHomeActivity()
+            finish()
         }
 
         setContentView(R.layout.activity_login)

@@ -55,6 +55,8 @@ object ConfigurationSingleton {
 
     private var defaultColorsSelected = false
 
+    private var restartNeeded = false
+
     private var LGREEN = Color.parseColor("#6fbd72")
 
     private val NEGATIVE = floatArrayOf(
@@ -105,6 +107,11 @@ object ConfigurationSingleton {
         }
         fontSize = normalSizeFont + ((seekBar_positioning-1) * 3)
     }
+
+    fun setRestartNeeded(value : Boolean) {
+        restartNeeded = value
+    }
+    fun getRestartNeeded() : Boolean = restartNeeded
 
     fun setListClass(list : List<AulasDiscente>) {
         listClass = list

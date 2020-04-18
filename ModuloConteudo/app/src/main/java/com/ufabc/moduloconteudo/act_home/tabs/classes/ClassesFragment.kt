@@ -48,13 +48,14 @@ class ClassesFragment : Fragment() {
     val classes : MutableList<Aula> = mutableListOf()
     var studentRa : String = ""
     var daysOfWeek : Array<String> = arrayOf()
+    lateinit var root: View
 
     private val classesViewModel : ClassesViewModel by viewModels {
         InjectorUtils.provideTurmaViewModelFactory(requireContext())
     }
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
-        val root = inflater.inflate(R.layout.fragment_classes, container, false)
+        root = inflater.inflate(R.layout.fragment_classes, container, false)
 
         studentRa = ConfigurationSingleton.getRA().toString()
         daysOfWeek = resources.getStringArray(R.array.week_days)
@@ -64,8 +65,12 @@ class ClassesFragment : Fragment() {
         setClickEvents()
         setObservers()
 
-        persistConfigModificationsOnAllViews(root, context)
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        persistConfigModificationsOnAllViews(root, context)
     }
 
     override fun onStart() {

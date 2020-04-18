@@ -30,7 +30,6 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         supportActionBar?.hide()
 
-        ConfigurationSingleton.persistConfigModificationsOnAllViews(window.decorView.rootView, null)
 
         fab = findViewById(R.id.fab_libras)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
@@ -59,6 +58,12 @@ class HomeActivity : AppCompatActivity() {
         navView.itemIconSize = 120
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(window.decorView.rootView, null)
+    }
+
 
     private fun setClickListeners() {
 

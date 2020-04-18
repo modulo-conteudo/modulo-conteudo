@@ -22,7 +22,7 @@ class TutorialFragment : Fragment() {
     private lateinit var tutorialViewModel: TutorialViewModel
     private lateinit var btn_slides : Button
     private lateinit var btn_video  : Button
-
+    private lateinit var root : View
 
 
     override fun onCreateView(
@@ -32,12 +32,16 @@ class TutorialFragment : Fragment() {
     ): View? {
         tutorialViewModel =
             ViewModelProviders.of(this).get(TutorialViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_tutorial, container, false)
+        root = inflater.inflate(R.layout.fragment_tutorial, container, false)
 
-        ConfigurationSingleton.persistConfigModificationsOnAllViews(root, context)
         bindComponents(root)
         createListeners()
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(root, context)
     }
 
     private fun createListeners() {

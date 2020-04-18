@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.ufabc.moduloconteudo.App
 import com.ufabc.moduloconteudo.R
 import com.ufabc.moduloconteudo.act_config.*
 import com.ufabc.moduloconteudo.act_login.LoginActivity
@@ -27,17 +29,12 @@ class ConfigurationFragment : Fragment(){
 
     private lateinit var viewModel: ConfigurationViewModel
     private lateinit var v : View
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
 
+    override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
 
         val view : View = inflater.inflate(R.layout.fragment_configuration, container, false)
         v = view
 
-        // This sets the default boldness of a view in onCreate time
-        ConfigurationSingleton.persistConfigModificationsOnAllViews(view, context)
 
 
 //        ConfigurationSingleton.setSwitchPositioning(view)
@@ -55,7 +52,6 @@ class ConfigurationFragment : Fragment(){
             val intent = Intent(context, HighContrastActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivityForResult(intent, 2)
-            TODO("Fechar o app ou conseguir reiniciar esse Fragment. Apenas mandar ele rodar a linha de baixo da umas bugada e o metodo onActivityResult não funcionou")
         }
 
         view.vibrate_switch.setOnClickListener {_ ->
@@ -86,19 +82,40 @@ class ConfigurationFragment : Fragment(){
             val intent = Intent(context, ColorSelectorActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivityForResult(intent, 2)
-            TODO("Fechar o app ou conseguir reiniciar esse Fragment. Apenas mandar ele rodar a linha de baixo da umas bugada e o metodo onActivityResult não funcionou")
 //            ConfigurationSingleton.persistConfigModificationsOnAllViews(view, null)
-
         }
 
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // This sets the default boldness of a view in onResume time
+        ConfigurationSingleton.persistConfigModificationsOnAllViews(v, context)
+
+        // This restarts activity if is necessary
+        if(ConfigurationSingleton.getRestartNeeded())
+            callRestartAlertDialog()
+    }
+
+    private fun callRestartAlertDialog() {
+        MaterialAlertDialogBuilder(context)
+            .setTitle("AVISO")
+            .setMessage("Reinicie o aplicativo para aplicar as configurações.")
+            .setPositiveButton("OK"){_, _ ->
+                ConfigurationSingleton.setRestartNeeded(false)
+                activity?.finish()
+            }
+            .setCancelable(false)
+            .show()
     }
 
     private fun startLoginActivity() {
         val intent = Intent(context, LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent, null)
-//        activity?.finish()
+        activity?.finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
