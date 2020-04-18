@@ -2,20 +2,39 @@ package com.ufabc.moduloconteudo.act_home.tabs.configuration
 
 import android.content.Context
 import android.content.Context.VIBRATOR_SERVICE
+import android.graphics.Color
+import android.graphics.ColorMatrixColorFilter
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
+import android.widget.FrameLayout
+import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toolbar
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.view.menu.MenuAdapter
+import androidx.appcompat.view.menu.MenuView
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.children
-import androidx.lifecycle.MutableLiveData
+import androidx.navigation.Navigation
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.internal.NavigationMenu
+import com.google.android.material.internal.NavigationSubMenu
+import com.google.android.material.navigation.NavigationView
+import com.ufabc.moduloconteudo.App.Companion.context
 import com.ufabc.moduloconteudo.R
-import com.ufabc.moduloconteudo.data.archives.GeneralClass
+import com.ufabc.moduloconteudo.R.drawable.delete_icon_lgreen
 import com.ufabc.moduloconteudo.data.relations.AulasDiscente
-import kotlinx.android.synthetic.main.fragment_configuration.view.*
 import kotlin.properties.Delegates
 
 
@@ -34,6 +53,33 @@ object ConfigurationSingleton {
 
     private var listClass = listOf<AulasDiscente>()
 
+    private var defaultColorsSelected = false
+
+    private var LGREEN = Color.parseColor("#6fbd72")
+
+    private val NEGATIVE = floatArrayOf(
+        -1.0f,
+        0f,
+        0f,
+        0f,
+        255f,
+        0f,
+        -1.0f,
+        0f,
+        0f,
+        255f,
+        0f,
+        0f,
+        -1.0f,
+        0f,
+        255f,
+        0f,
+        0f,
+        0f,
+        1.0f,
+        0f
+    )
+
     fun init(context: Context?) {
         if (context != null) {
             AppPreferences.init(context)
@@ -47,11 +93,15 @@ object ConfigurationSingleton {
             AppPreferences.MyVibrateOption = is_vibrate_enable
             AppPreferences.MyRaValue = ""
             AppPreferences.MyFabVisibility = false
+            AppPreferences.MyBGColor = "#FFFFFF"
+            AppPreferences.MyTxtColor = "#373737"
+            AppPreferences.MyDefColor = false
         } else {
             isBold = AppPreferences.MyBoldStatus
             seekBar_positioning = AppPreferences.MyFontSizeStatus
             isHighContrast = AppPreferences.MyHighContrastStatus
             is_vibrate_enable = AppPreferences.MyVibrateOption
+            defaultColorsSelected = AppPreferences.MyDefColor
         }
         fontSize = normalSizeFont + ((seekBar_positioning-1) * 3)
     }
@@ -85,8 +135,8 @@ object ConfigurationSingleton {
         }
     }
 
-    fun changeBoldness(view: View, btn: CompoundButton) {
-        this.isBold = !this.isBold
+    fun changeBoldness(v : Boolean) {
+        this.isBold = v
         AppPreferences.MyBoldStatus = isBold
     }
 
@@ -115,14 +165,87 @@ object ConfigurationSingleton {
 
         for (v in view.getAllViews()) {
             if (v is TextView) {
-                if (isBold)
-                    v.typeface = Typeface.DEFAULT_BOLD
-                else
-                    v.typeface = Typeface.DEFAULT
+                if(canChangeBoldness(v)) {
+                    if (isBold)
+                        v.typeface = Typeface.DEFAULT_BOLD
+                    else
+                        v.typeface = Typeface.DEFAULT
+                }
                 if(canChangeSize(v))
                     v.textSize = fontSize.toFloat()
+
+
+                if(canChangeTVColors(v)) {
+                    v.setTextColor(Color.parseColor(AppPreferences.MyTxtColor))
+                }
             }
+            if (!defaultColorsSelected) decideHowToChangeColors(v)
+            if(AppPreferences.MyHighContrastStatus) invertColor(v)
+
         }
+    }
+
+    private fun invertColor(v: View) {
+        if (v is MenuView || v is BottomNavigationView) {
+            v.setBackgroundColor(LGREEN)
+
+        } else if (v is MaterialButton && v.id != R.id.adapter_btnRemove && v.id != R.id.login_imgLogo) {
+            v.setBackgroundColor(LGREEN)
+            v.setTextColor(negative(v.currentTextColor))
+
+        } else if(v is ImageButton) {
+            v.setBackgroundColor(LGREEN)
+        }
+
+        else if(v is TextView) {
+            v.setTextColor(negative(v.currentTextColor))
+            if (v.text == "Módulo Conteúdo") v.setBackgroundColor(LGREEN)
+
+        } else if (v is ConstraintLayout || v is FrameLayout) {
+            v.setBackgroundColor(Color.BLACK)
+
+        } else if (v is Drawable) {
+            v.colorFilter = ColorMatrixColorFilter(NEGATIVE)
+
+        } else if(v is NavigationView) {
+            v.setBackgroundColor(LGREEN)
+        }
+
+    }
+
+    private fun decideHowToChangeColors(v: View) {
+        if (AppPreferences.MyHighContrastStatus) return
+        if ((v is MaterialButton || v is TextView)) {
+            v.setBackgroundColor(Color.parseColor(AppPreferences.MyBGColor))
+
+        } else if (v is ConstraintLayout || v is FrameLayout) {
+            val colorint = Color.parseColor(AppPreferences.MyBGColor)
+            v.setBackgroundColor(negative(colorint))
+
+        }
+//        else if (v is NavigationView || v is Toolbar) {
+//            val colorint = Color.parseColor("#1E6824")
+//            v.setBackgroundColor(negative(colorint))
+//        }
+    }
+
+    private fun negative(colorint: Int): Int {
+        val nr = 255 - Color.red(colorint)
+        val ng = 255 - Color.green(colorint)
+        val nb = 255 - Color.blue(colorint)
+        return Color.rgb(nr, ng, nb)
+    }
+
+    private fun canChangeBGcolor(v: View): Boolean {
+        return (v is ConstraintLayout)
+    }
+
+    private fun canChangeTVColors(v: TextView): Boolean {
+        return !defaultColorsSelected && !AppPreferences.MyHighContrastStatus
+    }
+
+    private fun canChangeBoldness(v: TextView): Boolean {
+        return v.text != "Módulo Conteúdo"
     }
 
     private fun canChangeSize(v: TextView): Boolean {
@@ -142,21 +265,21 @@ object ConfigurationSingleton {
 
     }
 
-    fun bigText(view: View, i: Int) {
+    fun bigText(view: TextView, i: Int) {
         seekBar_positioning = i
         fontSize = normalSizeFont + ((seekBar_positioning-1) *3)
         AppPreferences.MyFontSizeStatus = seekBar_positioning
 
-        view.font_size_text_view.text = "Tamanho da fonte: ${font_text[seekBar_positioning]}"
+        view.text = "Tamanho da fonte: ${font_text[seekBar_positioning]}"
     }
 
-    fun setSwitchPositioning(view: View) {
-        view.font_size_text_view.text = "Tamanho da fonte: ${font_text[seekBar_positioning]}"
-        view.bold_switch.isChecked = this.isBold
-        view.vibrate_switch.isChecked = is_vibrate_enable
-        view.fab_btn_visibility.isChecked = AppPreferences.MyFabVisibility
-        view.seekBar.progress = this.seekBar_positioning
-    }
+//    fun setSwitchPositioning(view: View) {
+//        view.font_size_text_view.text = "Tamanho da fonte: ${font_text[seekBar_positioning]}"
+//        view.bold_switch.isChecked = this.isBold
+//        view.vibrate_switch.isChecked = is_vibrate_enable
+//        view.fab_btn_visibility.isChecked = AppPreferences.MyFabVisibility
+//        view.seekBar.progress = this.seekBar_positioning
+//    }
 
     // Torcer pra essa porcaria não ir ao infinito e além
     private fun View.getAllViews(): List<View> {
@@ -172,5 +295,15 @@ object ConfigurationSingleton {
         AppPreferences.MyVibrateOption = is_vibrate_enable
     }
 
+    fun ChangeColors(rgbColorText: String, rgbColorBg: String, defaultSelected: Boolean) {
+        defaultColorsSelected = defaultSelected
+        AppPreferences.MyDefColor = defaultColorsSelected
+        AppPreferences.MyBGColor = rgbColorBg
+        AppPreferences.MyTxtColor = rgbColorText
+    }
 
+    fun changeHighContrastOpt(b: Boolean) {
+        AppPreferences.MyHighContrastStatus = b
+
+    }
 }

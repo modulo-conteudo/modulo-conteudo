@@ -30,6 +30,18 @@
     <string name="santo_andre">Santo André</string>
     <string name="sao_bernardo">São Bernardo</string>
     <string name="type">Tipo</string>
+
+    <string name="boldTitle">Negrito</string>
+    <string name="colorTitle">Cores</string>
+    <string name="fontsTitle">Tamanho das letras</string>
+    <string name="highContrastTitle">Alto contraste</string>
+    <string name="vibrateTitle">Vibração ao navegar</string>
+    <string name="librasTitle">Botão Libras</string>
+
+    <string name="sim">SIM</string>
+    <string name="nao">NÃO</string>
+
+
     <string name="theory">Teoria</string>
     <string name="practice">Prática</string>
     <string name="general_info">INFORMAÇÕES GERAIS</string>
@@ -55,6 +67,18 @@
     <string name="content_description_tut_images">Imagem contendo imagens das telas do aplicativo.</string>
     <string name="tut_text_counter">1/0</string>
     <string name="tut_btn_exit">SAIR</string>
+
+    <string name="texto_em_negrito">Texto em negrito</string>
+    <string name="vibrar_ao_mudar_de_tela">Vibrar ao mudar de tela</string>
+    <string name="ativar_o_bot_o_libras">Ativar o botão libras</string>
+    <string name="tamanho_das_letras">Tamanho das letras</string>
+
+    <string name="action_libras">Tradução para Libras</string>
+    <string name="selecione_a_cor_do_fundo">Selecione a cor do fundo</string>
+    <string name="selecione_a_cor_do_texto">Selecione a cor do texto</string>
+    <string name="colors_title">Cores</string>
+    <string name="default_text">Padrão</string>
+
     <string-array name="week_days">
         <item>@string/sunday</item>
         <item>@string/monday</item>

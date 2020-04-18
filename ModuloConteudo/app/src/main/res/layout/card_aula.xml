@@ -80,15 +80,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/adapter_teacherName"/>
 
+
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/adapter_btnRemove"
             style="@style/Widget.MaterialComponents.Button.TextButton"
-            app:icon="@drawable/delete_icon"
+            android:id="@+id/adapter_btnRemove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:icon="@drawable/delete_icon"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
