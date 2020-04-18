@@ -55,6 +55,7 @@ class ConfigurationFragment : Fragment(){
             val intent = Intent(context, HighContrastActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivityForResult(intent, 2)
+            TODO("Fechar o app ou conseguir reiniciar esse Fragment. Apenas mandar ele rodar a linha de baixo da umas bugada e o metodo onActivityResult não funcionou")
         }
 
         view.vibrate_switch.setOnClickListener {_ ->
@@ -85,6 +86,7 @@ class ConfigurationFragment : Fragment(){
             val intent = Intent(context, ColorSelectorActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivityForResult(intent, 2)
+            TODO("Fechar o app ou conseguir reiniciar esse Fragment. Apenas mandar ele rodar a linha de baixo da umas bugada e o metodo onActivityResult não funcionou")
 //            ConfigurationSingleton.persistConfigModificationsOnAllViews(view, null)
 
         }
