@@ -20,7 +20,7 @@ object AppPreferences {
 
     private val BG_COLOR_STATUS = Pair("bg_color_mc", "#FFFFFF")
     private val TXT_COLOR_STATUS = Pair("txt_color_mc", "#373737")
-    private val DEF_COLOR_STATUS = Pair("def_color_mc", false)
+    private val DEF_COLOR_STATUS = Pair("def_color_mc", true)
 
 
     fun init(context: Context) {

@@ -50,7 +50,7 @@ object ConfigurationSingleton {
 
     private var listClass = listOf<AulasDiscente>()
 
-    private var defaultColorsSelected = false
+    private var defaultColorsSelected = true
 
     private var restartNeeded = false
 
@@ -94,7 +94,7 @@ object ConfigurationSingleton {
             AppPreferences.MyFabVisibility = false
             AppPreferences.MyBGColor = "#FFFFFF"
             AppPreferences.MyTxtColor = "#373737"
-            AppPreferences.MyDefColor = false
+            AppPreferences.MyDefColor = true
 
         } else {
             isBold = AppPreferences.MyBoldStatus
