@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.ufabc.moduloconteudo.act_add_class.AddClassActivity
 import com.ufabc.moduloconteudo.utilities.InjectorUtils
 import com.ufabc.moduloconteudo.R
@@ -157,7 +158,7 @@ class ClassesFragment : Fragment() {
         }
 
         fabAddClass.setOnClickListener {
-            startAddClassActivity()
+            startAddClassActivity(it)
         }
     }
 
@@ -190,7 +191,8 @@ class ClassesFragment : Fragment() {
         ConfigurationSingleton.setListClass(list)
     }
 
-    private fun startAddClassActivity() {
+    private fun startAddClassActivity(view : View) {
+        //Snackbar.make(view, "Adicionar disciplina", Snackbar.LENGTH_LONG).show()
         val intent = Intent(activity, AddClassActivity::class.java)
         startActivity(intent, null)
     }

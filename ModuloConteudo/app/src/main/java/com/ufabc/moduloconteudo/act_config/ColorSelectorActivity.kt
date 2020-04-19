@@ -38,7 +38,6 @@ class ColorSelectorActivity : AppCompatActivity() {
         setContentView(R.layout.activity_config_color_selector)
         ConfigurationSingleton.persistConfigModificationsOnAllViews(window.decorView.rootView, context)
 
-
         bindComponents()
         setListeners()
 
