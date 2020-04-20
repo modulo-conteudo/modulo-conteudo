@@ -46,7 +46,7 @@ object ConfigurationSingleton {
     private var is_vibrate_enable:Boolean = false
 
     private var fontSize by Delegates.notNull<Int>()
-    private lateinit var fab_libras : View
+    private lateinit var fab_libras : MenuItem
 
     private var listClass = listOf<AulasDiscente>()
 
@@ -123,10 +123,9 @@ object ConfigurationSingleton {
 
     fun getRA(): String? = AppPreferences.MyRaValue
 
-    fun setFabLibrasVisibility(fab: View) {
+    fun setFabLibrasVisibility(fab: MenuItem) {
         fab_libras = fab
-        if (!AppPreferences.MyFabVisibility)
-            fab.visibility = View.GONE
+        fab.isVisible = AppPreferences.MyFabVisibility
     }
 
 //    fun setBoldnessOnAllViews(view: View) {
@@ -147,11 +146,7 @@ object ConfigurationSingleton {
 
     fun changeFabVisibility(isChecked: Boolean) {
         AppPreferences.MyFabVisibility = isChecked
-
-        if (isChecked)
-            fab_libras.visibility = View.VISIBLE
-        else
-            fab_libras.visibility = View.GONE
+        fab_libras.isVisible = isChecked
     }
 
 //    fun changeConfigExample(txt:TextView) {
