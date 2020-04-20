@@ -1,6 +1,5 @@
 package com.ufabc.moduloconteudo.act_tut
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
@@ -8,7 +7,6 @@ import android.widget.MediaController
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
 import com.ufabc.moduloconteudo.R
-import com.ufabc.moduloconteudo.act_home.HomeActivity
 
 class TutorialVideoActivity : AppCompatActivity() {
     lateinit var btn_exit : Button
@@ -27,7 +25,7 @@ class TutorialVideoActivity : AppCompatActivity() {
     }
 
     private fun configureVideoView() {
-        videoPath = "android.resource://" + packageName + "/" + R.raw.video_example
+        videoPath = "android.resource://" + packageName + "/" + R.raw.teste_libras
         uri = Uri.parse(videoPath)
         video_view.setVideoURI(uri)
 
@@ -36,6 +34,7 @@ class TutorialVideoActivity : AppCompatActivity() {
         media_controller.setAnchorView(video_view)
 
         video_view.start()
+        video_view.setOnPreparedListener({ mp -> mp.setLooping(true) })
     }
 
     private fun bindComponents() {
